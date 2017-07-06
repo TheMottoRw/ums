@@ -1,0 +1,950 @@
+@dashboardHome("Settings"){
+  <div ng-controller="MainController" class="controllerCall">
+    @frontHeader()
+    <br />
+    <br />
+    <style>
+    #side-menu-1,#side-menu-2,#side-menu-3{
+    background-color: ;color:;}
+    .list-group-item:nth-child(1){margin-top:5% }
+    .list-group-item{height:60px;padding-top: 20px; }
+    #side-menu-1:hover,#side-menu-2:hover,#side-menu-3:hover,#side-menu-4:hover,#side-menu-5:hover,#side-menu-6:hover{
+    background-color: #6f000d;color:white;}
+    #side-menu-1:focus,#side-menu-2:focus,#side-menu-3:focus,#side-menu-4:focus,#side-menu-5:focus,#side-menu-6:focus{
+    background-color:#6f000d;color:white;}
+    li{list-style-type: none;display: inline; background-color: #6f000d;color:white;padding: 1% 2% 1% 2%;border-radius:3px; color:white;font-size: 14px;}
+    </style>
+    <div class="col-lg-3">
+      <div  class="list-group success" style="width: 100%; margin-top: -20%; margin-left: -10%;background-color:">
+        <a class=" list-group-item sbmenu" id="side-menu-1" href="#branches" style="">
+          <span class="round-tabs">
+          <i class="glyphicon glyphicon-pencil"></i>
+        </span>Branches</a>
+        <a class=" list-group-item sbmenu" id="side-menu-2" href="#application" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Application</a>
+        <a class=" list-group-item sbmenu" id="side-menu-3" href="#faculties" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Faculties</a>
+        <a class=" list-group-item sbmenu" id="side-menu-4" href="#departments" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Departments</a>
+        <a class=" list-group-item sbmenu" id="side-menu-5" href="#sponsors" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Sponsors</a>
+        <a class=" list-group-item sbmenu" id="side-menu-6" href="#employees" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Employees</a>
+      </div>
+
+    </div>
+    <!--branch Info-->
+    <div class="branchInfo">
+    <nav class="tabs" style="font-color:white;">
+      <ul>
+        <li><a href="#branchreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <li><a href="#branchview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <li><a href="#" id="" style="color:white">Historical</a></li>
+      </ul>
+      </nav>
+      <div class="col-lg-6 panel" id="branch" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%; padding-bottom: 1%">
+        <br/>
+        <div class="row" id="branchregform">
+          <form name="form" action=""method="POST">
+            <h3>New Branch Registration</h3><br>
+            <p style="color:green;">{{ regbranchsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="chancellornames">Chancellor</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="chancellornames" name="chancellornames" class="form-control" ng-model="chancellornames">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="branchname">Branch Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="branchname" name="branchname" class="form-control" ng-model="branchname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="branchaddress">Address</label>
+              </div>
+              <div class="col-lg-9">
+                <textarea cols="50" rows="5" id="branchaddress" name="branchaddress" class="form-control" ng-model="branchaddress"></textarea>
+              </div>
+              <div class="col-lg-1"></div>
+            </div>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regbranch" id="regbranch"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row" id="branchupdform">
+          <form name="form" action=""method="POST">
+            <h3>{{branches[0].branch_name}} Branch Updating</h3><br>
+
+            <p style="color:green;">{{ updbranchsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updchancellornames">Chancellor</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updchancellornames" name="updchancellornames" class="form-control" ng-model="updchancellornames">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updbranchname">Branch Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updbranchname" name="updbranchname" class="form-control" ng-model="updbranchname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updbranchaddress">Address</label>
+              </div>
+              <div class="col-lg-9">
+                <textarea cols="50" rows="5" id="updbranchaddress" name="updbranchaddress" class="form-control" ng-model="updbranchaddress"></textarea>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="updbranch" id="regbranch"value="">Update</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="branchviewform">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="branch name..." ng-model="keyword" class="form-control">
+            </div></form><br/>
+          <span style="color:green">{{ branchfeedmsg }}</span><br/>
+          <div class="col-lg-3">Names </div><div class="col-lg-3"> Chancellor</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
+          <div class="" ng-repeat="branch in branches">
+            <div class="col-lg-3"> {{ branch.branch_name }}</div>
+            <div class="col-lg-3">{{ branch.branch_email }}</div>
+            <div class="col-lg-3">{{ branch.branch_phone }}</div>
+            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
+            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+              </a></div>
+          </div><!--ng repeat-->
+        </div><!--end branchviewform-->
+        <br/><br/>
+      </div><!--panel 6 branch-->
+    </div><!--end branch info-->
+
+    <!--application Info-->
+    <div class="applicationInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#applicationreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#appicationview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#" id="" style="color:white">Historical</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-6 panel" id="department" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="applicationregform">
+          <form name="form" action=""method="POST">
+            <h3>Application Period Registration</h3><br>
+            <p style="color:green;">{{ regappsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="academicyear">Academic Year</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="academicyear" name="academicyear" class="form-control" ng-model="academicyear">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="depfacultyname">Start Time</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="starttime" name="starttime" class="form-control" ng-model="starttime">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="depfacultyname">End Time</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="endtime" name="endtime" class="form-control" ng-model="endtime">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregapplication" id="btnregapplication"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row" id="applicationupdform">
+          <form name="form" action=""method="POST">
+            <h3>{{application[0].application_academic}} Aplication Updating</h3><br>
+
+            <p style="color:green;">{{ upddepartmentsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updacademicyear">Academic Year</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updacademicyear" name="updacademicyear" class="form-control" ng-model="updacademicyear">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="depfacultyname">Start Time</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="starttime" name="updstarttime" class="form-control" ng-model="updstarttime">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="depfacultyname">End Time</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="endtime" name="updendtime" class="form-control" ng-model="updendtime">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdapplication" id="updapplication"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="applicationviewform">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="department name..." ng-model="keyword" class="form-control">
+            </div></form><br/>
+          <span style="color:green">{{ applicationfeedmsg }}</span><br/>
+          <div class="col-lg-4"> Academic Year </div>
+          <div class="col-lg-4"> Start Time&nbsp;&nbsp;&nbsp;&nbsp;End Time</div><div class="col-lg-4">Modifications</div>
+          <div class="" ng-repeat="appl in applications">
+            <div class="col-lg-4"> {{ appl.academic_year }}</div>
+            <div class="col-lg-4">{{ appl.start_time }}&nbsp;&nbsp;&nbsp;&nbsp; {{ appl.end_time }}</div>
+            <div class="col-lg-4"><a href="#" id="updCands" class="fa fa-eye updCands">
+            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+              </a></div>
+          </div><!--ng repeat-->
+        </div><!--end branchviewform-->
+        <br/><br/>
+      </div><!--panel 6 branch-->
+    </div><!--end departments info-->
+
+
+    <!--end application-->
+<!--faculty info-->
+    <div class="facultyInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#facultyreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#facultyview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#" id="" style="color:white">Historical</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-6 panel" id="faculty" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="facultyregform">
+          <form name="form" action=""method="POST">
+            <h3>New Faculty Registration</h3><br>
+            <p style="color:green;">{{ regfacultysuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="facultyname">Faculty Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="facultyname" name="facultyname" class="form-control" ng-model="facultyname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="facbranchname">Branch Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="facbranchname" name="facbranchname" class="form-control" ng-model="facbranchname">
+                  <option>SELECT BRANCH</option>
+                  </select>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregfaculty" id="btnregfaculty"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row" id="facultyupdform">
+          <form name="form" action=""method="POST">
+            <h3>{{updfaculty[0].faculty_name}} Faculty Updating</h3><br>
+
+            <p style="color:green;">{{ updfacultysuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updfacultyname">Faculty Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updfacultyname" name="updfacultyname" class="form-control" ng-model="updfacultyname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updfacbranchname">Branch Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="updfacbranchname" name="updfacbranchname" class="form-control" ng-model="updfacbranchname">
+                  <option>SELECT BRANCH</option>
+                </select>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdfaculty" id="btnupdfaculty"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="facultyviewform">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="Faculty name..." ng-model="keyword" class="form-control">
+            </div></form><br/>
+          <span style="color:green">{{ facultyfeedmsg }}</span><br/>
+          <div class="col-lg-3">Names </div><div class="col-lg-3"> Chancellor</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
+          <div class="" ng-repeat="faculty in faculties">
+            <div class="col-lg-3"> {{ faculty.faculty_name }}</div>
+            <div class="col-lg-3">{{ faculty.faculty_email }}</div>
+            <div class="col-lg-3">{{ faculty.faculty_phone }}</div>
+            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
+            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+              </a></div>
+          </div><!--ng repeat-->
+        </div><!--end facultyviewform-->
+        <br/><br/>
+      </div><!--panel 6 faculty-->
+    </div><!--end faculty info-->
+    <!--department info-->
+    <div class="departmentsInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#departmentreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#departmentview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#" id="" style="color:white">Historical</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-6 panel" id="department" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="departmentregform">
+          <form name="form" action=""method="POST">
+            <h3>New Department Registration</h3><br>
+            <p style="color:green;">{{ regdeparmentsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="departmentname">Department Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="departmentname" name="departmentname" class="form-control" ng-model="departmentname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="depfacultyname">Faculty Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="depfacultyname" name="depfacultyname" class="form-control" ng-model="depfacultyname">
+                  <option>SELECT FACULTY</option>
+                </select>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregdeparment" id="btnregdepartment"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row" id="departmentupdform">
+          <form name="form" action=""method="POST">
+            <h3>{{department[0].department_name}} Department Updating</h3><br>
+
+            <p style="color:green;">{{ upddepartmentsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="upddepartmentname">Department Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="upddepartmentname" name="upddepartmentname" class="form-control" ng-model="upddepartmentname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updfacultyname">Faculty Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="upddepfacultyname" name="upddepfacultyname" class="form-control" ng-model="upddepfacultyname">
+                  <option>SELECT FACULTY</option>
+                </select>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupddepartment" id="updfaculty"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="departmentviewform">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="department name..." ng-model="keyword" class="form-control">
+            </div></form><br/>
+          <span style="color:green">{{ departmenfeedmsg }}</span><br/>
+          <div class="col-lg-4"> Names </div>
+           <div class="col-lg-4"> Faculty</div><div class="col-lg-4">Modifications</div>
+          <div class="" ng-repeat="dept in department">
+            <div class="col-lg-4"> {{ dept.department_name }}</div>
+            <div class="col-lg-4">{{ dept.faculty_name }}</div>
+            <div class="col-lg-4"><a href="#" id="updCands" class="fa fa-eye updCands">
+            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+              </a></div>
+          </div><!--ng repeat-->
+        </div><!--end branchviewform-->
+        <br/><br/>
+      </div><!--panel 6 branch-->
+    </div><!--end departments info-->
+    <!--sponsor Info-->
+    <div class="sponsorInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#sponsorreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#sponsorview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#" id="" style="color:white">Historical</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-6 panel" id="sponsor" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="sponsorregform">
+          <form name="form" action=""method="POST">
+            <h3>New Sponsor Registration</h3><br>
+            <p style="color:green;">{{ regsponsorsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sponsorname">Sponsor's Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="sponsorname" name="sponsorname" class="form-control" ng-model="sponsorname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sponsoremail">E-mail</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="sponsoremail" name="sponsoremail" class="form-control" ng-model="sponsoremail">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sponsorphone">Phone</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="sponsorphone" name="sponsorphone" class="form-control" ng-model="sponsorphone">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sponsoraddress">Address</label>
+              </div>
+              <div class="col-lg-9">
+                <textarea cols="50" rows="5" id="sponsoraddress" name="sponsoraddress" class="form-control" ng-model="sponsoraddress"></textarea>
+              </div>
+              <div class="col-lg-1"></div>
+            </div>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regsponsor" id="regsponsor"value="">Register</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row" id="sponsorupdform">
+          <form name="form" action=""method="POST">
+            <h3>{{sponsor[0].sponsor_name}} Sponsor Updating</h3><br>
+
+            <p style="color:green;">{{ updsponsorsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updsponsorname">Sponsor's Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updsponsorname" name="updsponsorname" class="form-control" ng-model="updsponsorname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updsponsoremail">E-mail</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updsponsoremail" name="updsponsoremail" class="form-control" ng-model="updsponsoremail">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updsponsorphone">Phone</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="updsponsorphone" name="updsponsorphone" class="form-control" ng-model="updsponsorphone">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="updsponsoraddress">Address</label>
+              </div>
+              <div class="col-lg-9">
+                <textarea cols="50" rows="5" id="updsponsoraddress" name="updsponsoraddress" class="form-control" ng-model="updsponsoraddress"></textarea>
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/>
+            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="updsponsor" id="regsponsor"value="">Update</button></div><div class="col-lg-4"></div>
+          </form>
+        </div>
+
+          <!--end update-->
+          <!--sponsor view-->
+        <div class="row" id="sponsorviewform">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="sponsor name..." ng-model="keyword" class="form-control">
+            </div></form><br/>
+          <span style="color:green">{{ sponsorfeedmsg }}</span><br/>
+          <div class="col-lg-3">Names </div><div class="col-lg-3"> E-mail</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
+          <div class="" ng-repeat="sponsor in sponsors">
+            <div class="col-lg-3"> {{ sponsor.sponsor_name }}</div>
+            <div class="col-lg-3">{{ sponsor.sponsor_email }}</div>
+            <div class="col-lg-3">{{ sponsor.sponsor_phone }}</div>
+            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
+            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+              </a></div>
+          </div><!--ng repeat-->
+        </div><!--end sponsorviewform-->
+        <br/><br/>
+      </div><!--panel 6 sponsor-->
+    </div><!--end sponsor info-->
+<div class="employeesInfo">
+    <nav class="tabs" style="font-color:white;">
+      <ul>
+        <li><a href="#employeesreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <li><a href="#employeesview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <li><a href="#" id="" style="color:white">Historical</a></li>
+      </ul>
+    </nav>
+    <div class="col-lg-6 panel" id="employees" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+      <br/>
+    <div class="row" id="employeeregform">
+      <form name="form" action=""method="POST">
+        <h3>New Employee Registration</h3><br>
+        <p style="color:green;">{{ regemployeessuccessmsg }}</p>
+          <div class="col-lg-6 form-group">
+            <label for="fname">First Name</label>
+            <input type="text" name="fname" id="fname" placeholder="Firstname" class="form-control" autocomplete="off" required>
+          </div>
+
+          <div class="col-lg-6  form-group">
+            <label for="lastname">Lastname</label>
+            <input type="text" name="lastname" id="lastname" placeholder="Lastname" class="form-control" autocomplete="off" required>
+          </div>
+
+          <div class="col-lg-6  form-group">
+            <label for="empemail">E-mail</label>
+            <input type="text" name="empemail" id="empemail" placeholder="email" class="form-control" autocomplete="off" required>
+          </div>
+          <div class="col-lg-6 form-group">
+            <label for="empphone">Phone</label>
+            <input type="text" name="empphone" id="empphone" placeholder="Phone Number" class="form-control" autocomplete="off" required>
+          </div>
+
+        <div class="col-lg-12 form-group">
+        <div class="row">
+          <div class="col-lg-6 form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" placeholder="location" class="form-control" autocomplete="off" required>
+<br>
+            <label for="updqualification">Qualification</label>
+            <input type="text" name="qualification" id="qualification" placeholder="Qualification" class="form-control" autocomplete="off" required>
+          </div>
+
+            <div class="col-lg-6  form-group">
+                <label for="empaddress">Address</label>
+                <textarea name="empaddress" id="empaddress" rows=5 cols="35" placeholder="Address" class="form-control" autocomplete="off" required></textarea>
+            </div>
+        </div>
+          </div>
+
+           <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regbranch" id="regbranch"value="">Register</button></div><div class="col-lg-4"></div>
+</form>
+
+    </div>
+
+  <div class="row" id="employeeupdform">
+    <form name="form" action=""method="POST">
+      <h3>{{ updemp.first_name }} &nbsp;&nbsp;{{ updemp.ast_name }} Updating</h3><br>
+      <p style="color:green;">{{ regemployeessuccessmsg }}</p>
+    <div class="col-lg-6 form-group">
+      <label for="updfname">First Name</label>
+      <input type="text" name="updfname" id="updfname" placeholder="Firstname" class="form-control" autocomplete="off" required>
+    </div>
+
+    <div class="col-lg-6  form-group">
+      <label for="updlastname">Lastname</label>
+      <input type="text" name="updlastname" id="updlastname" placeholder="Lastname" class="form-control" autocomplete="off" required>
+    </div>
+
+    <div class="col-lg-6  form-group">
+      <label for="updempemail">E-mail</label>
+      <input type="text" name="updempemail" id="updempemail" placeholder="email" class="form-control" autocomplete="off" required>
+    </div>
+
+
+    <div class="col-lg-6 form-group">
+      <label for="updempphone">Phone</label>
+      <input type="text" name="updempphone" id="updempphone" placeholder="Phone Number" class="form-control" autocomplete="off" required>
+
+    </div>
+    <div class="col-lg-6 form-group">
+      <div class="row">
+        <div class="col-lg-6 form-group">
+      <label for="updlocation">Location</label>
+      <input type="text" name="updlocation" id="updlocation" placeholder="location" class="form-control" autocomplete="off" required>
+    </div>
+        <div class="col-lg-6 form-group">
+        <label for="updqualification">Qualification</label>
+        <input type="text" name="updqualification" id="updqualification" placeholder="Qualification" class="form-control" autocomplete="off" required>
+      </div>
+        </div>
+    </div>
+    <div class="col-lg-6  form-group">
+      <label for="updempaddress">Address</label>
+      <textarea name="updempaddress" id="updempaddress" rows=5 cols="35" placeholder="Address" class="form-control" autocomplete="off" required></textarea>
+    </div>
+
+    <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdemployee" id="btnupdemployee"value="">Register</button></div><div class="col-lg-4"></div>
+  </div>
+
+      <div class="row" id="employeeviewform">
+        <form action="/search/" method="GET">
+          <div class="col-lg-12 input-goup">
+            <input type="text" name="srch" id="srch" placeholder="Employee name..." ng-model="keyword" class="form-control">
+          </div></form><br/>
+        <span style="color:green">{{ branchfeedmsg }}</span><br/>
+        <div class="col-lg-3">Names </div><div class="col-lg-3"> Contacts</div><div class="col-lg-3">Qualification</div><div class="col-lg-3">Modifications</div>
+        <div class="" ng-repeat="emp in employee">
+          <div class="col-lg-3"> {{ emp.employee_first_name }} &nbsp;&nbsp;{{ emp.last_name }} </div>
+          <div class="col-lg-3">{{ emp.email }}&nbsp;&nbsp;&nbsp; {{ emp.phone_number }}</div>
+          <div class="col-lg-3">{{emp.qualification}}</div>
+          <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
+          </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
+            </a></div>
+        </div><!--ng repeat-->
+      </div><!--end employeeviewform-->
+</div>
+
+</div>
+  </div>
+
+      <div class="col-lg-3">
+      </div>
+      @footer()
+
+  </div>
+}
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#starttime').click(function () {
+        $('#starttime').datepicker('show');
+      });
+      $('#endtime').click(function () {
+        $('#endtime').datepicker('show');
+      });
+    });
+    function checkURI(sdta){
+      alert(sdta);
+      switch(sdta){
+        case 'branches':
+        case 'branchreg':
+          document.querySelector(".branchInfo").style.display="block";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+                //branches interface
+          document.querySelector("#branchregform").style.display="block";
+          document.querySelector("#branchupdform").style.display="none";
+          document.querySelector("#branchviewform").style.display="none";
+          break;
+        case'branchupd':
+          document.querySelector(".branchInfo").style.display="block";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+
+          document.querySelector("#branchregform").style.display="none";
+          document.querySelector("#branchupdform").style.display="block";
+          document.querySelector("#branchviewform").style.display="none";
+          break;
+        case'branchview':
+          document.querySelector(".branchInfo").style.display="block";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          document.querySelector("#branchregform").style.display="none";
+          document.querySelector("#branchupdform").style.display="none";
+          document.querySelector("#branchviewform").style.display="block";
+          break;
+        case 'application':
+        case 'applicationreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+                //interface
+          document.querySelector("#applicationregform").style.display="block";
+          document.querySelector("#applicationupdform").style.display="none";
+          document.querySelector("#applicationviewform").style.display="none";
+          break;
+        case'applicationupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface
+          document.querySelector("#applicationregform").style.display="none";
+          document.querySelector("#applicationupdform").style.display="block";
+          document.querySelector("#applicationviewform").style.display="none";
+          break;
+        case'appicationview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+                //interface
+          document.querySelector("#applicationregform").style.display="none";
+          document.querySelector("#applicationupdform").style.display="none";
+          document.querySelector("#applicationviewform").style.display="block";
+          break;
+
+        case 'faculties':
+        case 'facultyreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="block";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //faculties interface
+          document.querySelector("#facultyregform").style.display="block";
+          document.querySelector("#facultyupdform").style.display="none";
+          document.querySelector("#facultyviewform").style.display="none";
+          break;
+        case'facultyupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="block";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //faculties interface
+          document.querySelector("#facultyregform").style.display="none";
+          document.querySelector("#facultyupdform").style.display="block";
+          document.querySelector("#facultyviewform").style.display="none";
+          break;
+        case'facultyview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="block";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //faculties interface
+          document.querySelector("#facultyregform").style.display="none";
+          document.querySelector("#facultyupdform").style.display="none";
+          document.querySelector("#facultyviewform").style.display="block";
+          break;
+        case 'departments':
+        case 'departmentreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+                //interface for department
+          document.querySelector("#departmentregform").style.display="block";
+          document.querySelector("#departmentupdform").style.display="none";
+          document.querySelector("#departmentviewform").style.display="none";
+          break;
+        case'departmentupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for department
+          document.querySelector("#departmentregform").style.display="none";
+          document.querySelector("#departmentupdform").style.display="block";
+          document.querySelector("#departmentviewform").style.display="none";
+          break;
+        case'departmentview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for department
+          document.querySelector("#departmentregform").style.display="none";
+          document.querySelector("#departmentupdform").style.display="none";
+          document.querySelector("#departmentviewform").style.display="block";
+          break;
+        case 'sponsors':
+        case 'sponsorreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="block";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for department
+          document.querySelector("#sponsorregform").style.display="block";
+          document.querySelector("#sponsorupdform").style.display="none";
+          document.querySelector("#sponsorviewform").style.display="none";
+          break;
+        case'sponsorupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="block";
+          document.querySelector(".employeesInfo").style.display="none";
+                //interface
+          document.querySelector("#sponsorregform").style.display="none";
+          document.querySelector("#sponsorupdform").style.display="block";
+          document.querySelector("#sponsorform").style.display="none";
+          break;
+        case'sponsorview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="block";
+          document.querySelector(".employeesInfo").style.display="none";
+                //interface
+          document.querySelector("#sponsorregform").style.display="none";
+          document.querySelector("#sponsorupdform").style.display="none";
+          document.querySelector("#sponsorviewform").style.display="block";
+          break;
+
+        case 'employees':
+        case 'employeesreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="block";
+          //interface for department
+          document.querySelector("#employeeregform").style.display="block";
+          document.querySelector("#employeeupdform").style.display="none";
+          document.querySelector("#employeeviewform").style.display="none";
+          break;
+        case'employeeupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="block";
+                  //interface for employee
+          document.querySelector("#employeeregform").style.display="none";
+          document.querySelector("#employeeupdform").style.display="block";
+          document.querySelector("#employeeviewform").style.display="none";
+          break;
+        case'employeesview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="block";
+                  //interface for employee
+          document.querySelector("#employeeregform").style.display="none";
+          document.querySelector("#employeeupdform").style.display="none";
+          document.querySelector("#employeeviewform").style.display="block";
+          break;
+
+        default:
+                alert("Default Issue")
+       document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+            document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+         document.querySelector(".employeesInfo").style.display="none";
+
+          document.querySelector("#branchregform").style.display="block";
+          document.querySelector("#branchupdform").style.display="none";
+          document.querySelector("#branchviewform").style.display="none";
+}
+    }
+    for(i=0;i<document.getElementsByClassName("sbmenu").length;i++){
+      document.getElementsByClassName("sbmenu")[i].onclick=function(e){
+        checkURI(e.target.toString().split("#")[1]);
+      }
+    }
+    checkURI(document.URL.toString().split("#/")==1?document.URL.toString().split("#/").length:document.URL.toString().split("#/")[1]);
+    </script>

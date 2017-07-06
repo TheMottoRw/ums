@@ -1,0 +1,86 @@
+@main("login page"){
+    <div ng-controller="MainController">
+        @frontHeader()
+        <br />
+        <br />
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 panel" style="border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;padding-bottom: 2%">
+            <br/>
+            <div ng-show="error" class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                <center><strong>Error!</strong> {{error}}.</center>
+            </div>
+            <form name="form" action="/admission/"method="get">
+                <center><img src="@routes.Assets.at("images/logo.jpg")" style="height: 100px;width: 200px"></center>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <i class="fa fa-key"></i>
+                    <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                </div>
+                <div class="form-actions">
+                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                    <button  type="submit" class="btn btn-success pull-left">Login</button>&nbsp;
+                    <div style="margin-top: 2%;" class="pull-right">
+                    <a  href="#"> Forgot password ?</a>  <a href="#" data-toggle="modal" data-target="#myModal"> New admission sign up</a>
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+
+            <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                <div class="modal-content" style="padding: 3%;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New admission sign up form</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/" method="get">
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" class="form-control" name="fname" id="fname" />
+                        </div>
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" class="form-control" name="lname" id="lname" />
+                        </div>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="text" class="form-control" name="email" id="email" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" id="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <input type="password" class="form-control" name="confpassword" id="confpassword" />
+                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success"> Submit</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+@footer()
+
+}

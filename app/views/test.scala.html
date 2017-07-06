@@ -1,0 +1,179 @@
+@dashboardHome("Test Page"){
+  <div ng-controller="MainController" class="controllerCall">
+    @frontHeader()
+    <br />
+    <br />
+    <style>
+    #side-menu-1{
+    background-color: #6f000d;color:white;}
+    .list-group-item{height:60px;padding-top: 20px;margin-top:5% }
+      li{list-style-type: none;display: inline; background-color: #6f000d;color:white;padding: 1% 2% 1% 2%;border-radius:3px; color:white;font-size: 14px;}
+    </style>
+    <div class="col-lg-3">
+      <div  class="list-group success" style="width: 100%; margin-top: -20%; margin-left: -10%;background-color:">
+
+        <a class=" list-group-item " id="side-menu-1" href="#" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>Candidates</a>
+      </div>
+
+    </div>
+    <nav class="tabs" style="font-color:white;">
+    <ul>
+      <li><a href="#" id="regformanchor" style="color:white">Register Candidates</a></li>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      <li><a href="#" id="registeredanchor"  style="color:white" ng-click="viewCandidates()">View Registered</a></li>
+    </ul>
+  <div class="col-lg-6 panel" style="border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;padding-bottom: 2%">
+      <br/>
+    <div class="row" id="regform">
+      <form name="form" action=""method="POST">
+        <h3>New Candidates Registration</h3><br>
+
+        <p style="color:green;">{{ successmsg }}</p>
+          <div class="form-group">
+            <div class="col-lg-2">
+                <label for="names">Names</label>
+            </div>
+                <div class="col-lg-9">
+                   <input type="text" id="names" name="names" class="form-control" ng-model="names">
+               </div>
+              <div class="col-lg-1"></div>
+        </div><br/><br/>
+          <div class="form-group">
+            <div class="col-lg-2">
+              <label for="names">Password</label>
+            </div>
+            <div class="col-lg-9">
+              <input type="password" id="pwd" name="pwd" class="form-control" ng-model="pwd">
+            </div>
+            <div class="col-lg-1"></div>
+          </div><br/><br/>
+          <div class="form-group">
+            <div class="col-lg-2">
+              <label for="names">E-mail</label>
+            </div>
+            <div class="col-lg-9">
+              <input type="text" id="email" name="email" class="form-control" ng-model="email">
+            </div>
+            <div class="col-lg-1"></div>
+          </div><br/><br/>
+          <div class="form-group">
+            <div class="col-lg-2">
+              <label for="names">Phone</label>
+            </div>
+            <div class="col-lg-9">
+              <input type="text" id="phone" name="phone" class="form-control" ng-model="phone">
+            </div>
+            <div class="col-lg-1"></div>
+          </div><br/>
+          <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regcand" id="regcand"value="" ng-click="registerCandidates()">Register</button></div><div class="col-lg-4"></div>
+      </form>
+    </div>
+    <!--updating form-->
+    <div class="row" id="updform">
+      <form name="form" action=""method="POST">
+        <h3>{{updcand[0].name}} Candidates Updating</h3><br>
+
+        <p style="color:green;">{{ updatesuccessmsg }}</p>
+        <div class="form-group">
+          <div class="col-lg-2">
+            <label for="names">Names</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="text" id="names" name="names" class="form-control" ng-model="names" value="{{updcand[0].name}}">
+          </div>
+          <div class="col-lg-1"></div>
+        </div><br/><br/>
+        <div class="form-group">
+          <div class="col-lg-2">
+            <label for="names">Password</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="password" id="pwd" name="pwd" class="form-control" ng-model="pwd"value="{{updcand[0].pwd}}">
+          </div>
+          <div class="col-lg-1"></div>
+        </div><br/><br/>
+        <div class="form-group">
+          <div class="col-lg-2">
+            <label for="names">E-mail</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="text" id="email" name="email" class="form-control" ng-model="email" value="{{updcand[0].email}}">
+          </div>
+          <div class="col-lg-1"></div>
+        </div><br/><br/>
+        <div class="form-group">
+          <div class="col-lg-2">
+            <label for="names">Phone</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="text" id="phone" name="phone" class="form-control" ng-model="phone" value="{{updcand[0].phone}}">
+          </div>
+          <div class="col-lg-1"></div>
+        </div><br/>
+        <div class="col-lg-4"></div><div class="col-lg-4"><br/>
+        <button type="button" class="btn btn-success" name="updcand" id="updcand"value="" ng-click="updateCandidates()">Update</button>
+        &nbsp; &nbsp; &nbsp;
+        <button type="button" class="btn btn-danger" name="cancelUpd" id="cancelUpd">Cancel</button>
+      </div><div class="col-lg-4"></div>
+      </form>
+    </div>
+
+      <!--end update-->
+      <!--registered-->
+    <div class="row" id="registered">
+      <form action="/search/" method="GET">
+        <div class="col-lg-12 input-goup">
+          <input type="text" name="srch" id="srch" placeholder="candidates name..." ng-model="keyword" ng-keyup="searchCandidates()" class="form-control">
+        </div></form><br/>
+      <span style="color:green">{{ feedmsg }}</span><br/>
+      <div class="col-lg-3">Names </div><div class="col-lg-3"> E-mail</div><div class="col-lg-3">Phone </div><div class="col-lg-3">Modifications</div>
+      <div class="" ng-repeat="cand in candidates">
+        <div class="col-lg-3"> {{ cand.name }}</div>
+        <div class="col-lg-3">{{ cand.email }}</div>
+        <div class="col-lg-3">{{ cand.phone }}</div>
+
+        <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
+        </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil" ng-click="loadUpdater(cand.id)"></a>
+            &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove" ng-click="disableCandidates(cand.id)"></a>
+          </a></div>
+        </a></div>
+        </div><!--ng repeat-->
+      </div>
+      <br/><br/>
+            </div><!--panel 6-->
+
+<div class="col-lg-3">
+  </div>
+  @footer()
+
+      </div>
+}
+  <script>
+    $(document).ready(function(){
+      //heiding content
+      $("#registered").hide();    $("#updform").hide();
+      $("#regformanchor").click(function(){
+        $("#regform").show();
+        $("#registered").hide();
+        $("#updform").show();
+      });
+      $("#registeredanchor").click(function(){
+        $("#regform").hide();
+        $("#registered").show();
+        $("#updform").hide();
+      });
+      $(".updCands").click(function(){
+        $("#regform").hide();
+        $("#registered").hide();
+        $("#updform").show();
+      });
+      $("#cancelUpd").click(function(){
+        $("#regform").hide();
+        $("#registered").show();
+        $("#updform").hide();
+      });
+    });
+    </script>

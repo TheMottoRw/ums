@@ -1,0 +1,35 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                                         controllers.Application.index()
+POST          /signin/                                                controllers.Application.signin()
+POST          /login/                                                controllers.Application.login()
+GET           /user/                                                  controllers.Application.user()
+GET           /logout/                                                controllers.Application.logout()
+GET           /admission/                                             controllers.Application.student()
+GET            /applicants/                                           controllers.Application.viewApplicants()
+GET            /setting/                                           controllers.Application.setting()
+
+
+#test for learning purpose
+GET           /test/                                                  controllers.Tests.test()
+POST           /registercandidates/                                   controllers.Tests.registCandidates()
+GET           /loadCandidates/                                        controllers.Tests.loadCandidates()
+GET           /searchCandidates/:name/                                controllers.Tests.searchCandidates(name:String)
+GET           /disableCandidates/:id/                                 controllers.Tests.disableCandidates(id:Long)
+GET            /loadCandidatesById/:id/                               controllers.Tests.loadCandidatesById(id:Long)
+POST           /updatecandidates/:id/                                 controllers.Tests.updateCandidates(id:Long)
+
+
+
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET          /assets/*file                            controllers.Assets.at(path="/public", file)
+
+
