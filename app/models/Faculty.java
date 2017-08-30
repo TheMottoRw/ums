@@ -27,7 +27,7 @@ public class Faculty extends Model {
     public Timestamp doneAt = new Timestamp(new Date().getTime());
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public Branch branch;
+    public BranchTable branchTable;
 
 
     public static Model.Finder<Long, Faculty> find = new Model.Finder<Long, Faculty>(Long.class, Faculty.class);
@@ -36,5 +36,11 @@ public class Faculty extends Model {
     }
     public static Faculty finderById(long id){
         return find.ref(id);
+    }
+    public static List<Faculty> findByName(String name){
+        return find.where().like("facultyName",name+"%").findList();
+    }
+    public static List<Faculty> findByBranch(long id){
+        return find.where().eq("branchTable", BranchTable.finderById(id)).findList();
     }
 }

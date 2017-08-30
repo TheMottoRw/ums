@@ -14,7 +14,7 @@
         </style>
         <div  class="list-group success" style="width: 130%; margin-top: -20%; margin-left: -10%;">
 
-          <a class=" list-group-item " id="side-menu-1" href="@routes.Application.user()" style="">
+          <a class=" list-group-item " id="side-menu-1" href="" style="">
             <span class="round-tabs">
               <i class="glyphicon glyphicon-pencil"></i>
             </span>Academic Choice</a>
@@ -93,25 +93,28 @@
                           <div class="row">
                             <h2 style="margin-left: 24%">Academic Choice</h2>
                             <div class="col-lg-6 form-group">
-                              <label for="campus">Campus</label>
-                              <select id="campus" class="form-control">
-                                <option> Branches</option>
+                              <label for="adbranchname">Campus</label>
+                              <select id="adbranchname" name="adbranchname" class="form-control" ng-init="loadBranch()" ng-change="loadFacultyByBranch()" ng-model="adbranchid">
+                                <option ng-repeat="adbranch in branches" value="{{adbranch.id}}">{{adbranch.branchName}}</option>
                               </select>
                             </div>
 
 
                             <div class="col-lg-6  form-group">
                               <label for="apptype">Application Type</label>
-                              <select id="apptype" class=" form-control">
+                              <select id="apptype" class=" form-control" ng-init="loadApptype()">
                                 <option>Applications Type</option>
+                                <option ng-repeat="apptype in apptypes" value="{{apptype.id}}">{{apptype.typeName}}</option>
                               </select>
                             </div>
 
                             <div class="col-lg-6  form-group">
-                              <label for="faculty">Faculty</label>
-                              <select id="faculty"class=" form-control">
-                                <option> Faculties</option>
+                              <label for="adfacultyname">Faculty</label>
+                              <select id="adfacultyname" name="adfacultyname" class="form-control" ng-change="loadDepartmentByFaculty()" ng-model="adfacultyid">
+                                <option selected>Select Faculty</option>
+                                <option ng-repeat="adfaculty in faculties" value="{{adfaculty.id}}">{{adfaculty.facultyName}}</option>
                               </select>
+
                             </div>
 
                             <div class="col-lg-6 form-group">
@@ -122,24 +125,28 @@
                             </div>
 
                             <div class="col-lg-6 form-group">
-                              <label for="department">Department</label>
-                              <select id="department" class=" form-control">
-                                <option> Departments</option>
+                              <label for="addepartmentname">Department</label>
+                              <select id="addepartmentname" name="addepartmentname" class="form-control" ng-change="loadSectionByDepartment()" ng-model="addepartmentid">
+                                <option selected>Select Department</option>
+                                <option ng-repeat="addepartment in departments" value="{{addepartment.id}}">{{addepartment.departmentName}}</option>
                               </select>
+
                             </div>
 
                             <div class="col-lg-6  form-group">
                               <div class="row">
                                 <div class="col-lg-6">
-                                  <label for="class">Class</label>
-                                  <select id="class" class=" form-control">
-                                    <option> Levels</option>
+                                  <label for="section">Section</label>
+                                  <select id="section" class=" form-control" ng-init="loadSection()" ng-change="loadClassesBySection()" ng-model="adsectionid">
+                                    <option selected> Select Section</option>
+                                    <option ng-repeat="section in sections" value="{{section.id}}">{{ section.sectionName }}</option>
                                   </select>
                                 </div>
                                 <div class="col-lg-6  form-group">
-                                  <label for="section">Section</label>
-                                  <select id="section" class=" form-control">
-                                    <option> Sections</option>
+                                  <label for="class">Class</label>
+                                  <select id="class" class=" form-control" ng-model="adclassid">
+                                    <option> Choose Levels</option>
+                                    <option ng-repeat="class in classes" value="classes.id">{{ class.classesName }}</option>
                                   </select>
                                 </div>
                               </div>
@@ -195,7 +202,12 @@
                                   <div class="col-lg-6">
                                     <label for="class">Province</label>
                                     <select id="class" class=" form-control">
-                                      <option> Levels</option>
+                                      <option> Province</option>
+                                      <option> South</option>
+                                      <option> North</option>
+                                      <option> East</option>
+                                      <option> West</option>
+                                      <option> Kigali City</option>
                                     </select>
                                   </div>
                                   <div class="col-lg-6  form-group">
@@ -311,8 +323,9 @@
 
                           <div class="col-lg-6 sponsorslist">
                             <label for="sponsors"> Sponsors</label>
-                            <select name="sponsors" id="sponsors" class="form-control">
+                            <select name="sponsors" id="sponsors" class="form-control" ng-init="loadSponsor()" ng-model="stdSponsor">
                             <option>Sponsors List</option>
+                              <option ng-repeat="sponsor in sponsors">{{sponsor.sponsorName}}</option>
                             </select>
                           </div>
 

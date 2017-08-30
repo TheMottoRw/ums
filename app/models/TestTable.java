@@ -13,12 +13,12 @@ import java.util.List;
  * Created by BPRAdmin on 6/26/2017.
  */
 @Entity
-public class Test extends Model {
+public class TestTable extends Model {
     @Id
     public long id;
     public String name="";
     public String pwd="";
-    public String phone="";
+    public long phone;
     public String email="";
 
 
@@ -27,24 +27,25 @@ public class Test extends Model {
     public String doneBy = "";
     public Timestamp doneAt = new Timestamp(new Date().getTime());
 
-    public static Model.Finder<Long, Test> find = new Model.Finder<Long, Test>(Long.class, Test.class);
-    public static List<Test> all(){
+    public static Model.Finder<Long, TestTable> find = new Model.Finder<Long, TestTable>(Long.class, TestTable.class);
+    public static List<TestTable> all(){
         return find.where().not(Expr.eq("delete_status", "1")).findList();
     }
 
-    public static Test finderById(long id){
+    public static TestTable finderById(long id){
         return find.ref(id);
     }
-    public static Test findByPhone(String phone) {
+    public static TestTable findByPhone(String phone) {
         return find.where().eq("phone", phone).findUnique();
     }
-    public static Test findByEmail(String email) {
+    public static TestTable findByEmail(String email) {
         return find.where().eq("email", email).findUnique();
     }
-    public static List<Test> findByName(String name) {
+    public static List<TestTable> findByName(String name) {
         return find.where().like("name", "%"+name+"%").findList();
     }
-    public static List<Test> filterById(Long id) {
+    public static List<TestTable> filterById(Long id) {
         return find.where().eq("id", id).findList();
    }
+
 }

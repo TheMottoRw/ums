@@ -29,12 +29,15 @@ public class Sponsor extends Model {
     public Timestamp doneAt = new Timestamp(new Date().getTime());
 
 
-    public static Model.Finder<Long,Section> find=new Model.Finder<Long,Section>(Long.class,Section.class);
-    public static List<Section> all(){
+    public static Model.Finder<Long,Sponsor> find=new Model.Finder<Long,Sponsor>(Long.class,Sponsor.class);
+    public static List<Sponsor> all(){
         return find.where().not(Expr.eq("delete_status","1")).findList();
     }
-    public static Section finderById(long id){
+    public static Sponsor finderById(long id){
         return find.ref(id);
+    }
+    public static List<Sponsor> findByName(String name){
+            return find.where().like("sponsorName",name+"%").findList();
     }
 
 }

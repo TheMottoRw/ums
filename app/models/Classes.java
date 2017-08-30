@@ -28,6 +28,8 @@ public class Classes extends Model {
 
     @ManyToOne(cascade = CascadeType.ALL)
     public Section section;
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Department department;
 
     public static Model.Finder<Long,Classes> find=new Model.Finder<Long,Classes>(Long.class,Classes.class);
     public static List<Classes> all(){
@@ -36,5 +38,13 @@ public class Classes extends Model {
     public static Classes finderById(long id){
         return find.ref(id);
     }
-    
+    public static List<Classes> findByName(String name){
+        return find.where().like("classesName",name+"%").findList();
+    }
+    public static List<Classes> findBySection(long id){
+        return find.where().eq("section",Section.finderById(id)).findList();
+    }
+    public static List<Classes> findByDepartment(long id){
+        return find.where().eq("department",Department.finderById(id)).findList();
+    }
 }

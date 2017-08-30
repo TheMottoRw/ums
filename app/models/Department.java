@@ -35,4 +35,10 @@ public class Department extends Model {
     public static Department finderById(long id){
         return find.ref(id);
     }
+    public static List<Department> findByName(String name){
+        return find.where().like("departmentName",name+"%").findList();
+    }
+    public static List<Department> findByFaculty(long id){
+        return find.where().eq("faculty",Faculty.finderById(id)).findList();
+    }
 }

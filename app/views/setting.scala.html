@@ -8,11 +8,21 @@
     background-color: ;color:;}
     .list-group-item:nth-child(1){margin-top:5% }
     .list-group-item{height:60px;padding-top: 20px; }
-    #side-menu-1:hover,#side-menu-2:hover,#side-menu-3:hover,#side-menu-4:hover,#side-menu-5:hover,#side-menu-6:hover{
-    background-color: #6f000d;color:white;}
-    #side-menu-1:focus,#side-menu-2:focus,#side-menu-3:focus,#side-menu-4:focus,#side-menu-5:focus,#side-menu-6:focus{
+    #side-menu-1:hover,#side-menu-2:hover,#side-menu-3:hover,#side-menu-4:hover,#side-menu-5:hover,#side-menu-6:hover,#side-menu-7:hover,#side-menu-8:hover,#side-menu-9:hover{
+    background-color: #6f000d;color:white;text-decoration:no-underline;}
+    #side-menu-1:focus,#side-menu-2:focus,#side-menu-3:focus,#side-menu-4:focus,#side-menu-5:focus,#side-menu-6:focus,#side-menu-7:focus,#side-menu-8:focus{
     background-color:#6f000d;color:white;}
     li{list-style-type: none;display: inline; background-color: #6f000d;color:white;padding: 1% 2% 1% 2%;border-radius:3px; color:white;font-size: 14px;}
+    .srch{font-size:18px;height:40px;font-weight: normal;padding:1%;border:1px solid lightgray}
+      .sbmenu:hover{text-decoration: none;}
+    .sbmenu:focus{text-decoration: none;}
+      .sbmenu{font-size: 18px;}
+    thead tr{background: lavenderblush}
+     tbody tr:nth-child(odd){background: fixed;}
+    tbody tr:nth-child(even){background: aliceblue;}
+      tbody th{font-weight: normal;}
+      caption{color: lightslategrey;font-weight: normal;font-size: 16px;font-family: "Lucida Bright"}
+      .branchInfo,.applicationInfo,.facultyInfo,.departmentInfo,.sponsorInfo,.employeeInfo{margin-top:-1%;}
     </style>
     <div class="col-lg-3">
       <div  class="list-group success" style="width: 100%; margin-top: -20%; margin-left: -10%;background-color:">
@@ -28,53 +38,71 @@
           <span class="round-tabs">
             <i class="glyphicon glyphicon-pencil"></i>
           </span>Faculties</a>
+
+
         <a class=" list-group-item sbmenu" id="side-menu-4" href="#departments" style="">
           <span class="round-tabs">
             <i class="glyphicon glyphicon-pencil"></i>
           </span>Departments</a>
-        <a class=" list-group-item sbmenu" id="side-menu-5" href="#sponsors" style="">
-          <span class="round-tabs">
-            <i class="glyphicon glyphicon-pencil"></i>
+
+
+            <a class=" list-group-item sbmenu" id="side-menu-5" href="#sections" style="">
+              <span class="round-tabs">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>Section</a>
+
+                <a class=" list-group-item sbmenu" id="side-menu-6" href="#classes" style="">
+                  <span class="round-tabs">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </span>Classes</a>
+
+                    <a class=" list-group-item sbmenu" id="side-menu-7" href="#sponsors" style="">
+                      <span class="round-tabs">
+                        <i class="glyphicon glyphicon-pencil"></i>
           </span>Sponsors</a>
-        <a class=" list-group-item sbmenu" id="side-menu-6" href="#employees" style="">
+
+        <a class=" list-group-item sbmenu" id="side-menu-8" href="#employees" style="">
           <span class="round-tabs">
             <i class="glyphicon glyphicon-pencil"></i>
           </span>Employees</a>
+        <a class=" list-group-item sbmenu" id="side-menu-9" href="/logout/" style="">
+          <span class="round-tabs">
+            <i class="glyphicon glyphicon-log-out"></i>
+          </span>Logout</a>
       </div>
-
     </div>
-    <!--branch Info-->
+    <!--branchTable Info-->
     <div class="branchInfo">
-    <nav class="tabs" style="font-color:white;">
+    <nav class="tabs" style="font-color:white;" ng-init="loadEmployee()">
       <ul>
         <li><a href="#branchreg" id="" class="sbmenu" style="color:white">Add New</a></li>
           &nbsp;&nbsp;&nbsp;&nbsp;
-        <li><a href="#branchview" id="" class="sbmenu" style="color:white">View Registered</a></li>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-        <li><a href="#" id="" style="color:white">Historical</a></li>
+        <li><a href="#branchview" id="" class="sbmenu" style="color:white" ng-click="loadBranch()">View Registered</a></li>
       </ul>
       </nav>
-      <div class="col-lg-6 panel" id="branch" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%; padding-bottom: 1%">
+      <div class="col-lg-8 panel" id="branchTable" style="height:;border:3px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;">
         <br/>
-        <div class="row" id="branchregform">
+        <div class="row" id="branchregform" style="margin-bottom:2.5% ">
           <form name="form" action=""method="POST">
-            <h3>New Branch Registration</h3><br>
+            <h3 style="margin-top:-0.1%">New BranchTable Registration</h3>
             <p style="color:green;">{{ regbranchsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="chancellornames">Chancellor</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="chancellornames" name="chancellornames" class="form-control" ng-model="chancellornames">
+                <select id="chancellornames" name="chancellornames" class="form-control" ng-model="chancellornames">
+                  <option ng-repeat="chancellor in employee"  value="{{chancellor.id}}">{{ chancellor.firstName }} &nbsp;&nbsp; {{ chancellor.lastName }} </option>
+                </select>
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
             <div class="form-group">
               <div class="col-lg-2">
-                <label for="branchname">Branch Name</label>
+                <label for="branchname">BranchTable Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="branchname" name="branchname" class="form-control" ng-model="branchname">
+                <input type="text" id="branchname" name="branchname" class="form-control" ng-model="branchName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -83,34 +111,44 @@
                 <label for="branchaddress">Address</label>
               </div>
               <div class="col-lg-9">
-                <textarea cols="50" rows="5" id="branchaddress" name="branchaddress" class="form-control" ng-model="branchaddress"></textarea>
+                <textarea cols="50" rows="5" id="branchaddress" name="branchaddress" class="form-control" ng-model="branchAddress"></textarea>
               </div>
               <div class="col-lg-1"></div>
             </div>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regbranch" id="regbranch"value="">Register</button></div><div class="col-lg-4"></div>
-          </form>
+            <div class="col-lg-5"></div><div class="col-lg-4" style="margin-top: -1%"><br/><button type="button" class="btn btn-success btn-lg" ng-click="registerBranch()" name="regbranch" id="regbranch"value="">  Register  </button></div><div class="col-lg-3"></div>
+        </form>
         </div>
           <!--updating form-->
-        <div class="row" id="branchupdform">
-          <form name="form" action=""method="POST">
-            <h3>{{branches[0].branch_name}} Branch Updating</h3><br>
+        <div class="row">
+          <div id="branchupdform" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form name="form" action="" method="POST">
 
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{updbranch.branchName}} BranchTable Updating</h4>
+                </div>
+                <div class="modal-body">
             <p style="color:green;">{{ updbranchsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="updchancellornames">Chancellor</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updchancellornames" name="updchancellornames" class="form-control" ng-model="updchancellornames">
+                <select id="updchancellornames" name="updchancellornames" class="form-control" ng-model="updbranch.chancellornames" ng-init="loadEmployee()">
+                  <option ng-repeat="chancellor in employee"  value="{{chancellor.id}}">{{ chancellor.id==updbranch.employee.id?updbranch.employee.firstName+"&nbsp;&nbsp;"+updbranch.employee.lastName+" (Current Chancellor) ":chancellor.firstName+"&nbsp;&nbsp;"+chancellor.lastName }} </option>
+                </select>
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
             <div class="form-group">
               <div class="col-lg-2">
-                <label for="updbranchname">Branch Name</label>
+                <label for="updbranchname">BranchTable Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updbranchname" name="updbranchname" class="form-control" ng-model="updbranchname">
+                <input type="text" id="updbranchname" name="updbranchname" class="form-control" ng-model="updbranch.branchName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -119,35 +157,50 @@
                 <label for="updbranchaddress">Address</label>
               </div>
               <div class="col-lg-9">
-                <textarea cols="50" rows="5" id="updbranchaddress" name="updbranchaddress" class="form-control" ng-model="updbranchaddress"></textarea>
+                <textarea cols="50" rows="5" id="updbranchaddress" name="updbranchaddress" class="form-control" ng-model="updbranch.branchAddress"></textarea>
               </div>
               <div class="col-lg-1"></div>
             </div><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="updbranch" id="regbranch"value="">Update</button></div><div class="col-lg-4"></div>
-          </form>
+            <!--div class="col-lg-5"></div><div class="col-lg-4"><br/></div><div class="col-lg-3"></div-->
+                <br> <br> <br></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success btn-md" style="margin-top: -1%" name="updbranch" id="regbranch" ng-click="updateBranch();">Update</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">
+                  Cancel</button>
+                </div>
+              </form>
+              </div>
+            </div>
+            </div>
         </div>
 
           <!--end update-->
           <!--registered-->
-        <div class="row" id="branchviewform">
+        <div class="row" id="branchviewform" ng-init="loadBranch()" style="margin-bottom:3% ">
           <form action="/search/" method="GET">
             <div class="col-lg-12 input-goup">
-              <input type="text" name="srch" id="srch" placeholder="branch name..." ng-model="keyword" class="form-control">
-            </div></form><br/>
+              <input type="text" name="srch" id="srch" placeholder="branchTable name..." ng-model="branchkeyword" ng-keyup="searchBranch()" class="form-control srch">
+            </div></form><br/><br/>
           <span style="color:green">{{ branchfeedmsg }}</span><br/>
-          <div class="col-lg-3">Names </div><div class="col-lg-3"> Chancellor</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
-          <div class="" ng-repeat="branch in branches">
-            <div class="col-lg-3"> {{ branch.branch_name }}</div>
-            <div class="col-lg-3">{{ branch.branch_email }}</div>
-            <div class="col-lg-3">{{ branch.branch_phone }}</div>
-            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
-            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-              </a></div>
-          </div><!--ng repeat-->
+          <table class="table table-bordered">
+            <caption>Registered Branches</caption>
+            <thead>
+               <tr> <th> Names </th><th> Chancellor </th> <th colspan="3"> Modifications </th></tr>
+            </thead>
+            <tbody>
+              <tr  ng-repeat="branchTable in branches">
+                <th> {{ branchTable.branchName }} </th>
+              <th> {{ branchTable.employee.firstName+"&nbsp;&nbsp;"+branchTable.employee.lastName }} </th>
+              <th style="text-align:center;"><a href="#" id="updCands" class="btn btn-success fa fa-eye updCands" data-toggle="modal" data-target="#viewBranchModal" ng-click="loadBranchUpdater(branchTable.id)">View</th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil"  data-toggle="modal" data-target="#branchupdform" ng-click="loadBranchUpdater(branchTable.id)">Edit</a></th>
+                   <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" ng-click="setCurrentCateId('branchTable',branchTable.id)">Delete</a>
+                </a></th>
+              </tr>
+            </tbody>
+            </table>
         </div><!--end branchviewform-->
-        <br/><br/>
-      </div><!--panel 6 branch-->
-    </div><!--end branch info-->
+      </div><!--panel 6 branchTable-->
+    </div><!--end branchTable info-->
 
     <!--application Info-->
     <div class="applicationInfo">
@@ -155,23 +208,25 @@
         <ul>
           <li><a href="#applicationreg" id="" class="sbmenu" style="color:white">Add New</a></li>
             &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#appicationview" id="" class="sbmenu" style="color:white">View Registered</a></li>
+          <li><a href="#appicationview" id="" class="sbmenu" style="color:white" ng-click="loadApplication()">View Registered</a></li>
             &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#" id="" style="color:white">Historical</a></li>
+          <li><a href="#applicationregtype" id="" class="sbmenu" style="color:white">Add Application Type</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#applicationviewtype" id="" class="sbmenu" style="color:white" ng-click="loadBranch()">View Application Type</a></li>
         </ul>
       </nav>
-      <div class="col-lg-6 panel" id="department" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+      <div class="col-lg-8 panel" id="application" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
         <br/>
         <div class="row" id="applicationregform">
           <form name="form" action=""method="POST">
-            <h3>Application Period Registration</h3><br>
-            <p style="color:green;">{{ regappsuccessmsg }}</p>
+            <h3  style="margin-top:-0.1%">Application Period Registration</h3>
+            <p style="color:green;">{{ regapplicationsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="academicyear">Academic Year</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="academicyear" name="academicyear" class="form-control" ng-model="academicyear">
+                <input type="text" id="academicyear" name="academicyear" class="form-control" ng-model="acyear">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -180,7 +235,7 @@
                 <label for="depfacultyname">Start Time</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="starttime" name="starttime" class="form-control" ng-model="starttime">
+                <input type="text" id="starttime" name="starttime" class="form-control" ng-model="start">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -189,34 +244,45 @@
                 <label for="depfacultyname">End Time</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="endtime" name="endtime" class="form-control" ng-model="endtime">
+                <input type="text" id="endtime" name="endtime" class="form-control" ng-model="end">
               </div>
               <div class="col-lg-1"></div>
-            </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregapplication" id="btnregapplication"value="">Register</button></div><div class="col-lg-4"></div>
+            </div>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-lg" style="margin-top: -1%" name="btnregapplication" id="btnregapplication" ng-click="registerApplication()">Register</button></div><div class="col-lg-3"></div>
           </form>
         </div>
           <!--updating form-->
-        <div class="row" id="applicationupdform">
-          <form name="form" action=""method="POST">
-            <h3>{{application[0].application_academic}} Aplication Updating</h3><br>
+        <div class="row">
+          <div  id="applicationupdform" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form name="form" action=""method="POST">
 
-            <p style="color:green;">{{ upddepartmentsuccessmsg }}</p>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3>{{updapplication.academicYear}} Application Updating</h3>
+                </div>
+                <div class="modal-body">
+          <form name="form" action=""method="POST">
+
+
+            <p style="color:green;">{{ updappsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="updacademicyear">Academic Year</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updacademicyear" name="updacademicyear" class="form-control" ng-model="updacademicyear">
+                <input type="text" id="updacademicyear" name="updacademicyear" class="form-control" ng-model="updapplication.academicYear">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
             <div class="form-group">
               <div class="col-lg-2">
-                <label for="depfacultyname">Start Time</label>
+                <label for="updstarttime">Start Time</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="starttime" name="updstarttime" class="form-control" ng-model="updstarttime">
+                <input type="text" id="starttime" name="updstarttime" class="form-control" ng-model="updapplication.startAt">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -225,12 +291,24 @@
                 <label for="depfacultyname">End Time</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="endtime" name="updendtime" class="form-control" ng-model="updendtime">
+                <input type="text" id="endtime" name="updendtime" class="form-control" ng-model="updapplication.endAt">
               </div>
               <div class="col-lg-1"></div>
-            </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdapplication" id="updapplication"value="">Register</button></div><div class="col-lg-4"></div>
-          </form>
+
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/></div><div class="col-lg-3"></div>
+          </div>
+
+              <!--div class="col-lg-5"></div><div class="col-lg-4"><br/></div><div class="col-lg-3"></div-->
+            <br> <br> <br></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success btn-md" style="margin-top: -1%" name="btnupdapplication" id="updapplication" ng-click="updateApplication()">Update</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
         </div>
 
           <!--end update-->
@@ -238,24 +316,109 @@
         <div class="row" id="applicationviewform">
           <form action="/search/" method="GET">
             <div class="col-lg-12 input-goup">
-              <input type="text" name="srch" id="srch" placeholder="department name..." ng-model="keyword" class="form-control">
-            </div></form><br/>
+              <input type="text" name="srch" id="srch" placeholder="academic year..." ng-model="appkeyword" ng-keyup="searchApplication()" class="form-control srch">
+            </div></form><br/><br/>
           <span style="color:green">{{ applicationfeedmsg }}</span><br/>
-          <div class="col-lg-4"> Academic Year </div>
-          <div class="col-lg-4"> Start Time&nbsp;&nbsp;&nbsp;&nbsp;End Time</div><div class="col-lg-4">Modifications</div>
-          <div class="" ng-repeat="appl in applications">
-            <div class="col-lg-4"> {{ appl.academic_year }}</div>
-            <div class="col-lg-4">{{ appl.start_time }}&nbsp;&nbsp;&nbsp;&nbsp; {{ appl.end_time }}</div>
-            <div class="col-lg-4"><a href="#" id="updCands" class="fa fa-eye updCands">
-            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-              </a></div>
-          </div><!--ng repeat-->
+          <table class="table table-bordered">
+            <caption>Registered Applications</caption>
+            <thead>
+              <tr>
+                <th>Academic Year </th><th> Start Time </th><th>End Time  </th><th colspan="2">Modifications  </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="appl in applications">
+                <th> {{ appl.academicYear }} </th>
+                <th>{{ appl.startAt }}  </th>
+                <th> {{ appl.endAt }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#applicationupdform" ng-click="loadApplicationUpdater(appl.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"  ng-click="setCurrentCateId('application',appl.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
         </div><!--end branchviewform-->
-        <br/><br/>
-      </div><!--panel 6 branch-->
-    </div><!--end departments info-->
+
+        <div class="row" id="applicationregtypeform" ng-init="loadApptype()">
+          <form name="form" action=""method="POST">
+            <h3 style="margin-top:-0.1%">New Application Type Registration</h3>
+            <p style="color:green;">{{ regapptypesuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sectionname">Application Type</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="apptypename" name="apptypename" class="form-control" ng-model="apptypename">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-md" name="btnregsection" id="btnregsection" ng-click="registerApptype()">Register</button></div><div class="col-lg-3"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row">
+          <div  id="applicationupdtypeform"  class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+              <div class="modal-content">
+                <form name="form" action=""method="POST">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>{{updapptype.typeName}} Application Type Updating</h3>
+                  </div>
+                  <div class="modal-body">
+                    <form name="form" action=""method="POST">
 
 
+                      <p style="color:green;">{{ updapptypesuccessmsg }}</p>
+                      <div class="form-group">
+                        <div class="col-lg-2">
+                          <label for="updapptypename">Application Type Name</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <input type="text" id="updapptypename" name="updapptypename" class="form-control" ng-model="updapptype.typeName">
+                        </div>
+                        <div class="col-lg-1"></div>
+                      </div><br/><br/>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-md" name="btnupdapptype" style="margin-top: -2%" id="btnupdapptype" ng-click="updateApptype()">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                          Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="applicationviewtypeform" ng-init="">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="app type name..." ng-model="apptypekeyword" ng-keyup="searchApptype()" class="form-control srch">
+            </div></form><br/><br/>
+          <span style="color:green">{{ apptypefeedmsg }}</span><br/>
+          <table class="table table-bordered">
+            <caption>Registered App Type</caption>
+            <thead>
+              <tr>
+                <th>App Type</th>
+                <th colspan="2"> Modifications </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="apptype in apptypes">
+                <th> {{ apptype.typeName }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#applicationupdtypeform"ng-click="loadApptypeUpdater(apptype.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"ng-click="setCurrentCateId('applicationtype',apptype.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
+        </div><!--end branchviewform-->
+      </div><!--panel 8 application-->
+    </div><!--end applicationInfo info-->
     <!--end application-->
 <!--faculty info-->
     <div class="facultyInfo">
@@ -263,16 +426,14 @@
         <ul>
           <li><a href="#facultyreg" id="" class="sbmenu" style="color:white">Add New</a></li>
             &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#facultyview" id="" class="sbmenu" style="color:white">View Registered</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#" id="" style="color:white">Historical</a></li>
+          <li><a href="#facultyview" id="" class="sbmenu" style="color:white" ng-click="loadFaculty()">View Registered</a></li>
         </ul>
       </nav>
-      <div class="col-lg-6 panel" id="faculty" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+      <div class="col-lg-8 panel" id="faculty" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
         <br/>
         <div class="row" id="facultyregform">
           <form name="form" action=""method="POST">
-            <h3>New Faculty Registration</h3><br>
+            <h3 style="margin-top:-0.1%">New Faculty Registration</h3>
             <p style="color:green;">{{ regfacultysuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
@@ -285,67 +446,89 @@
             </div><br/><br/>
             <div class="form-group">
               <div class="col-lg-2">
-                <label for="facbranchname">Branch Name</label>
+                <label for="facbranchname">BranchTable Name</label>
               </div>
               <div class="col-lg-9">
-                <select id="facbranchname" name="facbranchname" class="form-control" ng-model="facbranchname">
-                  <option>SELECT BRANCH</option>
+                <select id="facbranchname" name="facbranchname" class="form-control" ng-init="loadBranch()" ng-model="facbranchid">
+                  <option ng-repeat="facbr in branches" value="{{facbr.id}}">{{facbr.branchName}}</option>
                   </select>
               </div>
               <div class="col-lg-1"></div>
-            </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregfaculty" id="btnregfaculty"value="">Register</button></div><div class="col-lg-4"></div>
+            </div>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-md" style="margin-top: -1%;" name="btnregfaculty" ng-click="registerFaculty()" id="btnregfaculty"value="">Register</button></div><div class="col-lg-3"></div>
           </form>
         </div>
           <!--updating form-->
-        <div class="row" id="facultyupdform">
+        <div class="row">
+         <div id="facultyupdform"  class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form name="form" action="" method="POST">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3>{{updfaculty.facultyName}} Faculty Updating</h3>
+                </div>
+                <div class="modal-body">
           <form name="form" action=""method="POST">
-            <h3>{{updfaculty[0].faculty_name}} Faculty Updating</h3><br>
-
             <p style="color:green;">{{ updfacultysuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="updfacultyname">Faculty Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updfacultyname" name="updfacultyname" class="form-control" ng-model="updfacultyname">
+                <input type="text" id="updfacultyname" name="updfacultyname" class="form-control" ng-model="updfaculty.facultyName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
             <div class="form-group">
               <div class="col-lg-2">
-                <label for="updfacbranchname">Branch Name</label>
+                <label for="updfacbranchname">BranchTable Name</label>
               </div>
               <div class="col-lg-9">
-                <select id="updfacbranchname" name="updfacbranchname" class="form-control" ng-model="updfacbranchname">
-                  <option>SELECT BRANCH</option>
+                <select id="updfacbranchname" name="updfacbranchname" class="form-control" ng-init="loadBranch()" ng-model="updfaculty.branchid">
+                  <option ng-repeat="facbr in branches" value="{{facbr.id}}">{{facbr.branchName==updfaculty.branchTable.branchName?facbr.branchName+" (Current BranchTable)":facbr.branchName}}</option>
                 </select>
+
               </div>
               <div class="col-lg-1"></div>
-            </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdfaculty" id="btnupdfaculty"value="">Register</button></div><div class="col-lg-4"></div>
-          </form>
+                  <br> <br> <br></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success btn-md" style="margin-top: -1%" name="btnupdfaculty" id="btnupdfaculty" ng-click="updateFaculty()">Update</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-
+          </div>
+          </div>
           <!--end update-->
           <!--registered-->
-        <div class="row" id="facultyviewform">
+        <div class="row" id="facultyviewform" ng-init="loadFaculty()">
           <form action="/search/" method="GET">
             <div class="col-lg-12 input-goup">
-              <input type="text" name="srch" id="srch" placeholder="Faculty name..." ng-model="keyword" class="form-control">
-            </div></form><br/>
+              <input type="text" name="srch" id="srch" placeholder="Faculty name..." ng-model="facultykeyword" ng-keyup="searchFaculty()" class="form-control srch">
+            </div></form><br/><br/>
           <span style="color:green">{{ facultyfeedmsg }}</span><br/>
-          <div class="col-lg-3">Names </div><div class="col-lg-3"> Chancellor</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
-          <div class="" ng-repeat="faculty in faculties">
-            <div class="col-lg-3"> {{ faculty.faculty_name }}</div>
-            <div class="col-lg-3">{{ faculty.faculty_email }}</div>
-            <div class="col-lg-3">{{ faculty.faculty_phone }}</div>
-            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
-            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-              </a></div>
-          </div><!--ng repeat-->
+          <table class="table table-bordered">
+            <caption>Registered Faculties</caption>
+            <thead>
+              <tr> <th>Faculty Names  </th> <th>BranchTable  </th> <th colspan="2">  Modifications</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="faculty in faculties">
+                <th> {{ faculty.facultyName }} </th>
+                <th> {{faculty.branchTable.branchName}} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#facultyupdform" ng-click="loadFacultyUpdater(faculty.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"ng-click="setCurrentCateId('faculty',faculty.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
         </div><!--end facultyviewform-->
-        <br/><br/>
       </div><!--panel 6 faculty-->
     </div><!--end faculty info-->
     <!--department info-->
@@ -354,16 +537,14 @@
         <ul>
           <li><a href="#departmentreg" id="" class="sbmenu" style="color:white">Add New</a></li>
             &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#departmentview" id="" class="sbmenu" style="color:white">View Registered</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#" id="" style="color:white">Historical</a></li>
+          <li><a href="#departmentview" id="" class="sbmenu" style="color:white" ng-click="loadDepartment()">View Registered</a></li>
         </ul>
       </nav>
-      <div class="col-lg-6 panel" id="department" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+      <div class="col-lg-8 panel" id="department" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
         <br/>
-        <div class="row" id="departmentregform">
+        <div class="row" id="departmentregform" ng-init="loadFaculty()">
           <form name="form" action=""method="POST">
-            <h3>New Department Registration</h3><br>
+            <h3 style="margin-top:-0.1%">New Department Registration</h3>
             <p style="color:green;">{{ regdeparmentsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
@@ -379,19 +560,30 @@
                 <label for="depfacultyname">Faculty Name</label>
               </div>
               <div class="col-lg-9">
-                <select id="depfacultyname" name="depfacultyname" class="form-control" ng-model="depfacultyname">
-                  <option>SELECT FACULTY</option>
+                <select id="depfacultyname" name="depfacultyname" class="form-control" ng-model="depfacultyid">
+                  <option ng-repeat="faculty in faculties" value="{{faculty.id}}">{{faculty.facultyName}}</option>
                 </select>
               </div>
               <div class="col-lg-1"></div>
-            </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnregdeparment" id="btnregdepartment"value="">Register</button></div><div class="col-lg-4"></div>
+            </div>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-md" name="btnregdeparment" id="btnregdepartment" ng-click="registerDepartment()">Register</button></div><div class="col-lg-3"></div>
           </form>
         </div>
           <!--updating form-->
-        <div class="row" id="departmentupdform">
+        <div class="row">
+          <div  id="departmentupdform"  class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form name="form" action="" method="POST">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3>{{upddepartment.departmentName}} Department Updating</h3>
+                </div>
+                <div class="modal-body">
+
           <form name="form" action=""method="POST">
-            <h3>{{department[0].department_name}} Department Updating</h3><br>
+
 
             <p style="color:green;">{{ upddepartmentsuccessmsg }}</p>
             <div class="form-group">
@@ -399,7 +591,7 @@
                 <label for="upddepartmentname">Department Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="upddepartmentname" name="upddepartmentname" class="form-control" ng-model="upddepartmentname">
+                <input type="text" id="upddepartmentname" name="upddepartmentname" class="form-control" ng-model="upddepartment.departmentName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -408,60 +600,309 @@
                 <label for="updfacultyname">Faculty Name</label>
               </div>
               <div class="col-lg-9">
-                <select id="upddepfacultyname" name="upddepfacultyname" class="form-control" ng-model="upddepfacultyname">
-                  <option>SELECT FACULTY</option>
+                <select id="upddepfacultyname" name="upddepfacultyname" class="form-control" ng-model="upddepfacultyid">
+                  <option ng-repeat="faculty in faculties" value="{{faculty.id}}">{{faculty.facultyName==upddepartment.faculty.facultyName?faculty.facultyName+" (Current Faculty)":faculty.facultyName}}</option>
+                </select>
+
+              </div>
+              <div class="col-lg-1"></div>
+          <br> <br> <br></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-md" name="btnupddepartment" style="margin-top: -2%" id="updfaculty" ng-click="updateDepartment()">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+ </div>
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="departmentviewform" ng-init="loadDepartment()">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="department name..." ng-model="departmentkeyword" ng-keyup="searchDepartment()" class="form-control srch">
+            </div></form><br/><br/>
+          <span style="color:green">{{ departmenfeedmsg }}</span><br/>
+          <table class="table table-bordered">
+            <caption>Registered Departments</caption>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th> Faculty </th>
+                <th colspan="2"> Modifications </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="dept in departments">
+                <th> {{ dept.departmentName }} </th>
+                <th> {{ dept.faculty.facultyName }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#departmentupdform" ng-click="loadDepartmentUpdater(dept.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"ng-click="setCurrentCateId('department',dept.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
+        </div><!--end branchviewform-->
+      </div><!--panel 6 branchTable-->
+    </div><!--end departments info-->
+
+    <div class="sectionsInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#sectionreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#sectionview" id="" class="sbmenu" style="color:white" ng-click="loadSection()">View Registered</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-8 panel" id="section" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="sectionregform" ng-init="">
+          <form name="form" action=""method="POST">
+            <h3 style="margin-top:-0.1%">New Section Registration</h3>
+            <p style="color:green;">{{ regsectionsuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="sectionname">Section Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="sectionname" name="sectionsname" class="form-control" ng-model="sectionname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-md" name="btnregsection" id="btnregsection" ng-click="registerSection()">Register</button></div><div class="col-lg-3"></div>
+          </form>
+        </div>
+          <!--updating form-->
+        <div class="row">
+          <div  id="sectionupdform"  class="modal fade" role="dialog" ng-init="loadDepartment()">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+              <div class="modal-content">
+                <form name="form" action=""method="POST">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>{{updsection[0].sectionName}} Section Updating</h3>
+                  </div>
+                  <div class="modal-body">
+
+                    <form name="form" action=""method="POST">
+
+
+                      <p style="color:green;">{{ updsectionsuccessmsg }}</p>
+                      <div class="form-group">
+                        <div class="col-lg-2">
+                          <label for="updsectiontname">Section Name</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <input type="text" id="updsectionname" name="updsectionname" class="form-control" ng-model="updsection.sectionName">
+                        </div>
+                        <div class="col-lg-1"></div>
+                      </div><br/><br/>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-md" name="btnupdsection" style="margin-top: -2%" id="updsection" ng-click="updateSection()">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                          Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--end update-->
+          <!--registered-->
+        <div class="row" id="sectionviewform" ng-init="loadSection()">
+          <form action="/search/" method="GET">
+            <div class="col-lg-12 input-goup">
+              <input type="text" name="srch" id="srch" placeholder="section name..." ng-model="sectionkeyword" ng-keyup="searchSection()" class="form-control srch">
+            </div></form><br/><br/>
+          <span style="color:green">{{ sectionnfeedmsg }}</span><br/>
+          <table class="table table-bordered">
+            <caption>Registered Sections</caption>
+            <thead>
+              <tr>
+                <th>Section</th>
+                <th colspan="2"> Modifications </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="section in sections">
+                <th> {{ section.sectionName }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#sectionupdform"ng-click="loadSectionUpdater(section.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" ng-click="setCurrentCateId('section',section.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
+        </div><!--end branchviewform-->
+      </div><!--panel 6 branchTable-->
+    </div><!--end sections info-->
+
+    <div class="classesInfo">
+      <nav class="tabs" style="font-color:white;">
+        <ul>
+          <li><a href="#classesreg" id="" class="sbmenu" style="color:white">Add New</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="#classesview" id="" class="sbmenu" style="color:white" ng-click="loadClasses()">View Registered</a></li>
+        </ul>
+      </nav>
+      <div class="col-lg-8 panel" id="class" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+        <br/>
+        <div class="row" id="classregform" ng-init="loadFaculty()">
+          <form name="form" action=""method="POST">
+            <h3 style="margin-top:-0.1%">New Class Registration</h3>
+            <p style="color:green;">{{ regclasssuccessmsg }}</p>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="classname">Class Name</label>
+              </div>
+              <div class="col-lg-9">
+                <input type="text" id="classname" name="classname" class="form-control" ng-model="classname">
+              </div>
+              <div class="col-lg-1"></div>
+            </div><br/><br/>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="classsectionname">Department Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="classdeptname" name="classdeptname" class="form-control" ng-model="classdeptid" ng-init="loadDepartment()">
+                  <option ng-repeat="dept in departments" value="{{dept.id}}">{{dept.departmentName}}</option>
                 </select>
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupddepartment" id="updfaculty"value="">Register</button></div><div class="col-lg-4"></div>
+            <div class="form-group">
+              <div class="col-lg-2">
+                <label for="classsectionname">Section Name</label>
+              </div>
+              <div class="col-lg-9">
+                <select id="classsectionname" name="classsectionname" class="form-control" ng-model="classsecid">
+                  <option ng-repeat="section in sections" value="{{section.id}}">{{section.sectionName}}</option>
+                </select>
+              </div>
+              <div class="col-lg-1"></div>
+            </div>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-md" name="btnregdeparment" id="btnregdepartment" ng-click="registerClass()">Register</button></div><div class="col-lg-3"></div>
           </form>
         </div>
+          <!--Class form-->
+        <div class="row">
+          <div  id="classupdform"  class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+              <div class="modal-content">
+                <form name="form" action=""method="POST">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>{{classes.className}} Class Updating</h3>
+                  </div>
+                  <div class="modal-body">
 
+                    <form name="form" action=""method="POST">
+
+
+                      <p style="color:green;">{{ updclasssuccessmsg }}</p>
+                      <div class="form-group">
+                        <div class="col-lg-2">
+                          <label for="updclassname">Class Name</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <input type="text" id="updclassname" name="updclassname" class="form-control" ng-model="updclasses.classesName">
+                        </div>
+                        <div class="col-lg-1"></div>
+                      </div><br/><br/>
+                      <div class="form-group">
+                        <div class="col-lg-2">
+                          <label for="updclasssectionname">Department Name</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <select id="classdeptname" name="updclassdeptname" class="form-control" ng-model="classdeptid" ng-init="loadDepartment()">
+                            <option ng-repeat="upddept in departments" value="{{upddept.id}}">{{upddept.departmentName==updclasses.department.departmentName?updclasses.department.departmentName+" (Current Department)":upddept.departmentName}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"></div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-lg-2">
+                          <label for="updsectionname">Section Name</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <select id="updclasssecyname" name="updclasssecname" class="form-control" ng-model="classsecid">
+                            <option ng-repeat="section in sections" value="{{section.id}}">{{section.sectionName==updclasses.section.sectionName?section.sectionName+" (Current Section)":section.sectionName}}</option>
+                          </select>
+
+                        </div>
+                        <div class="col-lg-1"></div>
+                        <br> <br> <br></div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-md" name="btnupdclass" style="margin-top: -2%"  id="updclass" ng-click="updateClass()">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                          Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
           <!--end update-->
           <!--registered-->
-        <div class="row" id="departmentviewform">
+        <div class="row" id="classviewform" ng-init="loadClasses();loadSection()">
           <form action="/search/" method="GET">
             <div class="col-lg-12 input-goup">
-              <input type="text" name="srch" id="srch" placeholder="department name..." ng-model="keyword" class="form-control">
-            </div></form><br/>
-          <span style="color:green">{{ departmenfeedmsg }}</span><br/>
-          <div class="col-lg-4"> Names </div>
-           <div class="col-lg-4"> Faculty</div><div class="col-lg-4">Modifications</div>
-          <div class="" ng-repeat="dept in department">
-            <div class="col-lg-4"> {{ dept.department_name }}</div>
-            <div class="col-lg-4">{{ dept.faculty_name }}</div>
-            <div class="col-lg-4"><a href="#" id="updCands" class="fa fa-eye updCands">
-            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-              </a></div>
-          </div><!--ng repeat-->
+              <input type="text" name="srch" id="srch" placeholder="class name..." ng-model="classkeyword" ng-keyup="searchClass()" class="form-control srch">
+            </div></form><br/><br/>
+          <span style="color:green">{{ classfeedmsg }}</span><br/>
+          <table class="table table-bordered">
+            <caption>Registered Classes</caption>
+            <thead>
+              <tr>
+                <th>Classes</th>
+                <th> Department </th>
+                <th> Sections </th>
+                <th colspan="2"> Modifications </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="class in classes">
+                <th> {{ class.classesName }} </th>
+                <th> {{ class.department.departmentName }} </th>
+                <th> {{ class.section.sectionName }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#classupdform" ng-click="loadClassesUpdater(class.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"ng-click="setCurrentCateId('class',class.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
         </div><!--end branchviewform-->
-        <br/><br/>
-      </div><!--panel 6 branch-->
-    </div><!--end departments info-->
+      </div><!--panel 6 branchTable-->
+    </div><!--end classes info-->
+
     <!--sponsor Info-->
-    <div class="sponsorInfo">
+    <div class="sponsorInfo" ng-init="loadSponsor()">
       <nav class="tabs" style="font-color:white;">
         <ul>
           <li><a href="#sponsorreg" id="" class="sbmenu" style="color:white">Add New</a></li>
             &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#sponsorview" id="" class="sbmenu" style="color:white">View Registered</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a href="#" id="" style="color:white">Historical</a></li>
+          <li><a href="#sponsorview" id="" class="sbmenu" style="color:white" ng-click="loadSponsor()">View Registered</a></li>
         </ul>
       </nav>
-      <div class="col-lg-6 panel" id="sponsor" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+      <div class="col-lg-8 panel" id="sponsor" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%; padding-bottom:;">
         <br/>
         <div class="row" id="sponsorregform">
           <form name="form" action=""method="POST">
-            <h3>New Sponsor Registration</h3><br>
+            <h3 style="margin-top:-0.1%">New Sponsor Registration</h3>
             <p style="color:green;">{{ regsponsorsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="sponsorname">Sponsor's Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="sponsorname" name="sponsorname" class="form-control" ng-model="sponsorname">
+                <input type="text" id="sponsorname" name="sponsorname" class="form-control" ng-model="sponsorName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -470,7 +911,7 @@
                 <label for="sponsoremail">E-mail</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="sponsoremail" name="sponsoremail" class="form-control" ng-model="sponsoremail">
+                <input type="text" id="sponsoremail" name="sponsoremail" class="form-control" ng-model="sponsorEmail">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -479,7 +920,7 @@
                 <label for="sponsorphone">Phone</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="sponsorphone" name="sponsorphone" class="form-control" ng-model="sponsorphone">
+                <input type="text" id="sponsorphone" name="sponsorphone" class="form-control" ng-model="sponsorPhone">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -488,25 +929,33 @@
                 <label for="sponsoraddress">Address</label>
               </div>
               <div class="col-lg-9">
-                <textarea cols="50" rows="5" id="sponsoraddress" name="sponsoraddress" class="form-control" ng-model="sponsoraddress"></textarea>
+                <textarea cols="50" rows="5" id="sponsoraddress" name="sponsoraddress" class="form-control" ng-model="sponsorAddress"></textarea>
               </div>
               <div class="col-lg-1"></div>
             </div>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regsponsor" id="regsponsor"value="">Register</button></div><div class="col-lg-4"></div>
+            <div class="col-lg-5"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success btn-lg" name="regsponsor" style="margin-top: -1%" id="regsponsor" ng-click="registerSponsor()" value="">Register</button><br/><br/></div><div class="col-lg-3"></div>
           </form>
         </div>
           <!--updating form-->
-        <div class="row" id="sponsorupdform">
+        <div class="row">
+          <div id="sponsorupdform" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form name="form" action=""method="POST">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3>{{sponsor.sponsorName}} Sponsor Updating</h3>
+                </div>
+                <div class="modal-body">
           <form name="form" action=""method="POST">
-            <h3>{{sponsor[0].sponsor_name}} Sponsor Updating</h3><br>
-
             <p style="color:green;">{{ updsponsorsuccessmsg }}</p>
             <div class="form-group">
               <div class="col-lg-2">
                 <label for="updsponsorname">Sponsor's Name</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updsponsorname" name="updsponsorname" class="form-control" ng-model="updsponsorname">
+                <input type="text" id="updsponsorname" name="updsponsorname" class="form-control" ng-model="updsponsor.sponsorName">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -515,7 +964,7 @@
                 <label for="updsponsoremail">E-mail</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updsponsoremail" name="updsponsoremail" class="form-control" ng-model="updsponsoremail">
+                <input type="text" id="updsponsoremail" name="updsponsoremail" class="form-control" ng-model="updsponsor.sponsorEmail">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -524,7 +973,7 @@
                 <label for="updsponsorphone">Phone</label>
               </div>
               <div class="col-lg-9">
-                <input type="text" id="updsponsorphone" name="updsponsorphone" class="form-control" ng-model="updsponsorphone">
+                <input type="text" id="updsponsorphone" name="updsponsorphone" class="form-control" ng-model="updsponsor.sponsorPhone">
               </div>
               <div class="col-lg-1"></div>
             </div><br/><br/>
@@ -533,166 +982,323 @@
                 <label for="updsponsoraddress">Address</label>
               </div>
               <div class="col-lg-9">
-                <textarea cols="50" rows="5" id="updsponsoraddress" name="updsponsoraddress" class="form-control" ng-model="updsponsoraddress"></textarea>
+                <textarea cols="50" rows="5" id="updsponsoraddress" name="updsponsoraddress" class="form-control" ng-model="updsponsor.sponsorAddress"></textarea>
               </div>
               <div class="col-lg-1"></div>
-            </div><br/>
-            <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="updsponsor" id="regsponsor"value="">Update</button></div><div class="col-lg-4"></div>
-          </form>
+                  <br> <br> <br><br> <br> <br></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success btn-md" name="updsponsor" style="margin-top: -1%" id="regsponsor" ng-click="updateSponsor()">Update</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
         </div>
-
+</div>
           <!--end update-->
           <!--sponsor view-->
         <div class="row" id="sponsorviewform">
           <form action="/search/" method="GET">
             <div class="col-lg-12 input-goup">
-              <input type="text" name="srch" id="srch" placeholder="sponsor name..." ng-model="keyword" class="form-control">
-            </div></form><br/>
+              <input type="text" name="srch" id="srch" placeholder="sponsor name..." ng-model="sponsorkeyword" ng-keyup="searchSponsor()" class="form-control srch">
+            </div></form><br/><br/>
           <span style="color:green">{{ sponsorfeedmsg }}</span><br/>
-          <div class="col-lg-3">Names </div><div class="col-lg-3"> E-mail</div><div class="col-lg-3">Address </div><div class="col-lg-3">Modifications</div>
-          <div class="" ng-repeat="sponsor in sponsors">
-            <div class="col-lg-3"> {{ sponsor.sponsor_name }}</div>
-            <div class="col-lg-3">{{ sponsor.sponsor_email }}</div>
-            <div class="col-lg-3">{{ sponsor.sponsor_phone }}</div>
-            <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
-            </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-              </a></div>
-          </div><!--ng repeat-->
+          <table class="table table-bordered">
+            <caption>Registered Sponsors</caption>
+            <thead>
+              <tr>
+                <th> Sponsor </th>
+                <th> E-mail </th>
+                <th> Phone </th>
+                <th colspan="3">  Modifications</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="sponsor in sponsors">
+                <th> {{ sponsor.sponsorName }} </th>
+                <th> {{ sponsor.sponsorEmail }} </th>
+                <th> {{ sponsor.sponsorPhone }} </th>
+                <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#sponsorupdform"ng-click="loadSponsorUpdater(sponsor.id)">Edit</a></th>
+                <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" ng-click="setCurrentCateId('sponsor',sponsor.id)">Delete</a>
+                  </a></th>
+              </tr>
+            </tbody>
+          </table>
         </div><!--end sponsorviewform-->
-        <br/><br/>
       </div><!--panel 6 sponsor-->
     </div><!--end sponsor info-->
+
 <div class="employeesInfo">
     <nav class="tabs" style="font-color:white;">
       <ul>
         <li><a href="#employeesreg" id="" class="sbmenu" style="color:white">Add New</a></li>
           &nbsp;&nbsp;&nbsp;&nbsp;
-        <li><a href="#employeesview" id="" class="sbmenu" style="color:white">View Registered</a></li>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-        <li><a href="#" id="" style="color:white">Historical</a></li>
+        <li><a href="#employeesview" id="" class="sbmenu" style="color:white" ng-click="loadEmployee()">View Registered</a></li>
       </ul>
     </nav>
-    <div class="col-lg-6 panel" id="employees" style="height:;border:2px solid lightgray;box-shadow: 2px 2px 2px rgba(0, 0, 0, .5), -2px -2px 2px rgba(0, 0, 0, .5);border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
+    <div class="col-lg-8 panel" id="employees" style="height:;border:2px solid lightgray;box-shadow:;border-radius: 3px;padding:0% 3% 0% 3%;      padding-bottom: 1%">
       <br/>
     <div class="row" id="employeeregform">
       <form name="form" action=""method="POST">
-        <h3>New Employee Registration</h3><br>
-        <p style="color:green;">{{ regemployeessuccessmsg }}</p>
+        <h3 style="margin-top:-0.1%">New Employee Registration</h3>
+      <p style="color:green;">{{ regemployeesuccessmsg }}</p>
           <div class="col-lg-6 form-group">
             <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname" placeholder="Firstname" class="form-control" autocomplete="off" required>
+            <input type="text" name="fname" id="fname" placeholder="Firstname" class="form-control" ng-model="empfname" autocomplete="off" required>
           </div>
 
           <div class="col-lg-6  form-group">
             <label for="lastname">Lastname</label>
-            <input type="text" name="lastname" id="lastname" placeholder="Lastname" class="form-control" autocomplete="off" required>
+            <input type="text" name="lastname" id="lastname" placeholder="Lastname" class="form-control"  ng-model="emplname" autocomplete="off" required>
           </div>
 
           <div class="col-lg-6  form-group">
             <label for="empemail">E-mail</label>
-            <input type="text" name="empemail" id="empemail" placeholder="email" class="form-control" autocomplete="off" required>
+            <input type="text" name="empemail" id="empemail" placeholder="email" class="form-control" ng-model="empemail" autocomplete="off" required>
           </div>
           <div class="col-lg-6 form-group">
             <label for="empphone">Phone</label>
-            <input type="text" name="empphone" id="empphone" placeholder="Phone Number" class="form-control" autocomplete="off" required>
+            <input type="text" name="empphone" id="empphone" placeholder="Phone Number" class="form-control" ng-model="empphone" autocomplete="off" required>
           </div>
+
+        <div class="col-lg-6 form-group">
+          <label for="emppwd">Password</label>
+          <input type="password" name="emppwd" id="emppwd" class="form-control" ng-model="empppwd" autocomplete="off" required>
+        </div>
+
+        <div class="col-lg-6 form-group">
+          <label for="empconfpwd">Confirm Password</label>
+          <input type="password" name="empconfpwd" id="empconfpwd" class="form-control" ng-model="empconfpwd" autocomplete="off" required>
+        </div>
 
         <div class="col-lg-12 form-group">
         <div class="row">
           <div class="col-lg-6 form-group">
             <label for="location">Location</label>
-            <input type="text" name="location" id="location" placeholder="location" class="form-control" autocomplete="off" required>
+            <input type="text" name="location" id="location" placeholder="location" class="form-control" ng-model="emplocation" autocomplete="off" required>
 <br>
             <label for="updqualification">Qualification</label>
-            <input type="text" name="qualification" id="qualification" placeholder="Qualification" class="form-control" autocomplete="off" required>
+            <input type="text" name="qualification" id="qualification" placeholder="Qualification" class="form-control" ng-model="empqualification" autocomplete="off" required>
           </div>
 
             <div class="col-lg-6  form-group">
                 <label for="empaddress">Address</label>
-                <textarea name="empaddress" id="empaddress" rows=5 cols="35" placeholder="Address" class="form-control" autocomplete="off" required></textarea>
+                <textarea name="empaddress" id="empaddress" rows=5 cols="35" placeholder="Address" class="form-control" ng-model="empaddress" autocomplete="off" required></textarea>
             </div>
         </div>
           </div>
 
-           <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="regbranch" id="regbranch"value="">Register</button></div><div class="col-lg-4"></div>
+           <div class="col-lg-5"></div><div class="col-lg-4"><button type="button" class="btn btn-success btn-lg" name="btnregemployee" style="margin-top: -1%" id="btnregbranch" ng-click="registerEmployee()" value="">Register</button><br/><br/></div><div class="col-lg-3"></div>
 </form>
-
     </div>
 
-  <div class="row" id="employeeupdform">
+  <div class="row">
+    <div  id="employeeupdform" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+        <div class="modal-content">
+          <form name="form" action=""method="POST">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3>{{ updemp.firstName+"&nbsp;&nbsp;"+updemp.lastName }} Updating Employee</h3>
+            </div>
+            <div class="modal-body">
     <form name="form" action=""method="POST">
-      <h3>{{ updemp.first_name }} &nbsp;&nbsp;{{ updemp.ast_name }} Updating</h3><br>
-      <p style="color:green;">{{ regemployeessuccessmsg }}</p>
-    <div class="col-lg-6 form-group">
-      <label for="updfname">First Name</label>
-      <input type="text" name="updfname" id="updfname" placeholder="Firstname" class="form-control" autocomplete="off" required>
-    </div>
-
-    <div class="col-lg-6  form-group">
-      <label for="updlastname">Lastname</label>
-      <input type="text" name="updlastname" id="updlastname" placeholder="Lastname" class="form-control" autocomplete="off" required>
-    </div>
-
-    <div class="col-lg-6  form-group">
-      <label for="updempemail">E-mail</label>
-      <input type="text" name="updempemail" id="updempemail" placeholder="email" class="form-control" autocomplete="off" required>
-    </div>
-
-
-    <div class="col-lg-6 form-group">
-      <label for="updempphone">Phone</label>
-      <input type="text" name="updempphone" id="updempphone" placeholder="Phone Number" class="form-control" autocomplete="off" required>
-
-    </div>
-    <div class="col-lg-6 form-group">
-      <div class="row">
-        <div class="col-lg-6 form-group">
-      <label for="updlocation">Location</label>
-      <input type="text" name="updlocation" id="updlocation" placeholder="location" class="form-control" autocomplete="off" required>
-    </div>
-        <div class="col-lg-6 form-group">
-        <label for="updqualification">Qualification</label>
-        <input type="text" name="updqualification" id="updqualification" placeholder="Qualification" class="form-control" autocomplete="off" required>
+      <p style="color:green;">{{ updemployeesuccessmsg }}</p>
+      <div class="col-lg-6 form-group">
+        <label for="fname">First Name</label>
+        <input type="text" name="updfname" id="updfname" placeholder="Firstname" class="form-control" ng-model="updemp.firstName" autocomplete="off" required>
       </div>
+
+      <div class="col-lg-6  form-group">
+        <label for="lastname">Lastname</label>
+        <input type="text" name="updlastname" id="updlastname" placeholder="Lastname" class="form-control"  ng-model="updemp.lastName" autocomplete="off" required>
+      </div>
+
+      <div class="col-lg-6  form-group">
+        <label for="empemail">E-mail</label>
+        <input type="text" name="updempemail" id="updempemail" placeholder="email" class="form-control" ng-model="updemp.email" autocomplete="off" required>
+      </div>
+      <div class="col-lg-6 form-group">
+        <label for="updempphone">Phone</label>
+        <input type="text" name="updempphone" id="updempphone" placeholder="Phone Number" class="form-control" ng-model="updemp.phoneNumber" autocomplete="off" required>
+      </div>
+
+      <div class="col-lg-12 form-group">
+        <div class="row">
+          <div class="col-lg-6 form-group">
+            <label for="updlocation">Location</label>
+            <input type="text" name="updlocation" id="updlocation" placeholder="location" class="form-control" ng-model="updemp.location" autocomplete="off" required>
+            <br>
+            <label for="updqualification">Qualification</label>
+            <input type="text" name="updqualification" id="updqualification" placeholder="Qualification" class="form-control" ng-model="updemp.qualification" autocomplete="off" required>
+          </div>
+
+          <div class="col-lg-6  form-group">
+            <label for="empaddress">Address</label>
+            <textarea name="updempaddress" id="updempaddress" rows=5 cols="35" placeholder="Address" class="form-control" ng-model="updemp.address" autocomplete="off" required></textarea>
+          </div>
         </div>
+      </div>
+          <br> <br> <br><br> <br> <br></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-md" name="btnupdemployee" style="margin-top: -1%" id="btnupdemployee" ng-click="updateEmployee()">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Cancel</button>
+        </div>
+        </form>
+      </div>
     </div>
-    <div class="col-lg-6  form-group">
-      <label for="updempaddress">Address</label>
-      <textarea name="updempaddress" id="updempaddress" rows=5 cols="35" placeholder="Address" class="form-control" autocomplete="off" required></textarea>
-    </div>
-
-    <div class="col-lg-4"></div><div class="col-lg-4"><br/><button type="button" class="btn btn-success" name="btnupdemployee" id="btnupdemployee"value="">Register</button></div><div class="col-lg-4"></div>
   </div>
-
+  </div>
       <div class="row" id="employeeviewform">
         <form action="/search/" method="GET">
           <div class="col-lg-12 input-goup">
-            <input type="text" name="srch" id="srch" placeholder="Employee name..." ng-model="keyword" class="form-control">
-          </div></form><br/>
-        <span style="color:green">{{ branchfeedmsg }}</span><br/>
-        <div class="col-lg-3">Names </div><div class="col-lg-3"> Contacts</div><div class="col-lg-3">Qualification</div><div class="col-lg-3">Modifications</div>
-        <div class="" ng-repeat="emp in employee">
-          <div class="col-lg-3"> {{ emp.employee_first_name }} &nbsp;&nbsp;{{ emp.last_name }} </div>
-          <div class="col-lg-3">{{ emp.email }}&nbsp;&nbsp;&nbsp; {{ emp.phone_number }}</div>
-          <div class="col-lg-3">{{emp.qualification}}</div>
-          <div class="col-lg-3"><a href="#" id="updCands" class="fa fa-eye updCands">
-          </a>&nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-pencil"></a> &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove"></a>
-            </a></div>
-        </div><!--ng repeat-->
+            <input type="text" name="srch" id="srch" placeholder="Employee name..." ng-model="employeekeyword" ng-keyup="searchEmployee()" class="form-control srch">
+          </div></form><br/><br/>
+        <span style="color:green">{{ employeefeedmsg }}</span><br/>
+        <table class="table table-bordered">
+          <caption>Registered Employees</caption>
+          <thead>
+            <tr>
+              <th>Names  </th>
+              <th> Contacts </th>
+              <th>  Qualification</th>
+              <th colspan="2">  Modifications</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="emp in employee">
+              <th> {{ emp.firstName+"&nbsp;&nbsp;"+emp.lastName }}  </th>
+              <th> {{ emp.phoneNumber+";&nbsp;&nbsp;"+emp.email }} </th>
+              <th>  {{emp.qualification}}</th>
+              <th style="text-align:center;"><a href="#" class="btn btn-warning glyphicon glyphicon-pencil"data-toggle="modal" data-target="#employeeupdform"ng-click="loadEmployeeUpdater(emp.id)">Edit</a></th>
+              <th style="text-align:center;"><a href="#" class="btn btn-danger glyphicon glyphicon-remove"data-toggle="modal" data-target="#delModal" ng-click="setCurrentCateId('employee',emp.id)">Delete</a>
+                </a></th>
+            </tr>
+          </tbody>
+        </table>
       </div><!--end employeeviewform-->
 </div>
-
 </div>
-  </div>
 
-      <div class="col-lg-3">
+  <div id="delModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+      <div class="modal-content">
+        <form ng-submit="" >
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Do you want to delete  ?</h4>
+          </div>
+          <div class="modal-body" >
+            <p style="color:green;font-size:14px;"> {{delsuccessmsg}} </p>
+            <label>Delete reason </label>
+            <textarea class="form-control" ng-model="deleteReason" required></textarea>
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" ng-click="delete()" >
+              Delete</button><button type="button" class="btn btn-default" data-dismiss="modal">
+            Close</button>
+          </div>
+        </form>
       </div>
-      @footer()
 
-  </div>
-}
+    </div>
+  </div><!--end delete Modal-->
+
+    <div id="viewBranchModal" class="modal fade viewBranch" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+        <div class="modal-content">
+          <form ng-submit="" >
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"> {{ viewBranch.branchName }} Information</h4>
+            </div>
+            <div class="modal-body">
+    <h5><b>Chancellor:</b>{{ viewBranch.employee.firstName+"&nbsp;&nbsp;"+viewBranch.employee.lastName }}</h5>
+             <address><b>Address:</b>{{ viewBranch.branchAddress }}</address>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#branchupdform" ng-click="loadBranchUpdater(viewBranch.id)">
+                Edit</button><button type="button" class="btn btn-warning" data-dismiss="modal">
+              Close</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div><!--end view Modal-->
+
+        <div id="viewSponsorModal" class="modal fade viewSponsor" role="dialog">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+              <form ng-submit="" >
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"> {{ viewSponsor.sponsorName }} Ltd Information</h4>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <b>Phone:</b> {{viewSponsor.sponsorPhone}}<br/>
+                   <b> E-mail:</b>{{ viewSponsor.sponsorEmail }}
+                  </div>
+                  <div><b>Address:</b><br> {{ viewSponsor.sponsorAddress }}</div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#sponsorupdform" ng-click="loadSponsorUpdater(viewSponsor.id)">
+                    Edit</button><button type="button" class="btn btn-warning" data-dismiss="modal">
+                  Close</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div><!--end delete Modal-->
+
+    <div id="viewEmployeeModal" class="modal fade viewEmployee" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+        <div class="modal-content">
+          <form ng-submit="" >
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"> {{ viewEmployee.firstName+"&nbsp;&nbsp;"+viewEmployee.lastName }} Information</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <h5><b>Contact:</b></h5>
+                <b> E-mail:</b>{{vewEmployee.email}}<br>Phone:{{vewEmployee.phone}}
+              </div>
+                <div> <b>Qualification:</b>{{ vewEmployee.qualification }} </div>
+                <div>
+                  <h5><b>Address</b></h5>
+                  Location: {{ viewEmployee.location }}<br/>
+                  {{ viewEmployee.address }}
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#employeeupdform" ng-click="loadEmployeeUpdater(viewEmployee.id)">
+                Edit</button><button type="button" class="btn btn-warning" data-dismiss="modal">
+              Close</button>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+
+        <div class="col-lg-1">
+        </div>
 <script type="text/javascript">
     $(document).ready(function(){
+      //popover
+      $('[data-toggle="popover"]').popover();
+
       $('#starttime').click(function () {
         $('#starttime').datepicker('show');
       });
@@ -701,7 +1307,7 @@
       });
     });
     function checkURI(sdta){
-      alert(sdta);
+      //alert(sdta);
       switch(sdta){
         case 'branches':
         case 'branchreg':
@@ -709,9 +1315,11 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
-                //branches interface
+          //branches interface
           document.querySelector("#branchregform").style.display="block";
           document.querySelector("#branchupdform").style.display="none";
           document.querySelector("#branchviewform").style.display="none";
@@ -721,6 +1329,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
 
@@ -733,6 +1343,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           document.querySelector("#branchregform").style.display="none";
@@ -745,37 +1357,112 @@
           document.querySelector(".applicationInfo").style.display="block";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
-                //interface
+          //interface
           document.querySelector("#applicationregform").style.display="block";
           document.querySelector("#applicationupdform").style.display="none";
           document.querySelector("#applicationviewform").style.display="none";
+
+          document.querySelector("#applicationregtypeform").style.display="none";
+          document.querySelector("#applicationupdtypeform").style.display="none";
+          document.querySelector("#applicationviewtypeform").style.display="none";
           break;
+        case 'applicationregtype':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface
+          document.querySelector("#applicationregform").style.display="none";
+          document.querySelector("#applicationupdform").style.display="none";
+          document.querySelector("#applicationviewform").style.display="none";
+
+          document.querySelector("#applicationregtypeform").style.display="block";
+          document.querySelector("#applicationupdtypeform").style.display="none";
+          document.querySelector("#applicationviewtypeform").style.display="none";
+          break;
+
         case'applicationupd':
           document.querySelector(".branchInfo").style.display="none";
           document.querySelector(".applicationInfo").style.display="block";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //interface
           document.querySelector("#applicationregform").style.display="none";
           document.querySelector("#applicationupdform").style.display="block";
           document.querySelector("#applicationviewform").style.display="none";
+
+          document.querySelector("#applicationregtypeform").style.display="none";
+          document.querySelector("#applicationupdtypeform").style.display="none";
+          document.querySelector("#applicationviewtypeform").style.display="none";
           break;
+        case'applicationupdtype':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface
+          document.querySelector("#applicationregform").style.display="none";
+          document.querySelector("#applicationupdform").style.display="none";
+          document.querySelector("#applicationviewform").style.display="none";
+
+          document.querySelector("#applicationregtypeform").style.display="none";
+          document.querySelector("#applicationupdtypeform").style.display="block";
+          document.querySelector("#applicationviewtypeform").style.display="none";
+          break;
+
         case'appicationview':
           document.querySelector(".branchInfo").style.display="none";
           document.querySelector(".applicationInfo").style.display="block";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
-                //interface
+          //interface
           document.querySelector("#applicationregform").style.display="none";
           document.querySelector("#applicationupdform").style.display="none";
           document.querySelector("#applicationviewform").style.display="block";
+
+          document.querySelector("#applicationregtypeform").style.display="none";
+          document.querySelector("#applicationupdtypeform").style.display="none";
+          document.querySelector("#applicationviewtypeform").style.display="none";
           break;
+        case'applicationviewtype':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="block";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface
+          document.querySelector("#applicationregform").style.display="none";
+          document.querySelector("#applicationupdform").style.display="none";
+          document.querySelector("#applicationviewform").style.display="none";
+
+          document.querySelector("#applicationregtypeform").style.display="none";
+          document.querySelector("#applicationupdtypeform").style.display="none";
+          document.querySelector("#applicationviewtypeform").style.display="block";
+          break;
+
 
         case 'faculties':
         case 'facultyreg':
@@ -783,6 +1470,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="block";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //faculties interface
@@ -795,6 +1484,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="block";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //faculties interface
@@ -807,6 +1498,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="block";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //faculties interface
@@ -820,9 +1513,11 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
-                //interface for department
+          //interface for department
           document.querySelector("#departmentregform").style.display="block";
           document.querySelector("#departmentupdform").style.display="none";
           document.querySelector("#departmentviewform").style.display="none";
@@ -832,6 +1527,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //interface for department
@@ -844,6 +1541,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="block";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="none";
           //interface for department
@@ -851,12 +1550,104 @@
           document.querySelector("#departmentupdform").style.display="none";
           document.querySelector("#departmentviewform").style.display="block";
           break;
+
+        case 'sections':
+        case 'sectionreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="block";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for section
+          document.querySelector("#sectionregform").style.display="block";
+          document.querySelector("#sectionupdform").style.display="none";
+          document.querySelector("#sectionviewform").style.display="none";
+          break;
+        case'sectionupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="block";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for section
+          document.querySelector("#sectionregform").style.display="none";
+          document.querySelector("#sectionupdform").style.display="block";
+          document.querySelector("#sectionviewform").style.display="none";
+          break;
+        case'sectionview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="block";
+          document.querySelector(".classesInfo").style.display="none";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for section
+          document.querySelector("#sectionregform").style.display="none";
+          document.querySelector("#sectionupdform").style.display="none";
+          document.querySelector("#sectionviewform").style.display="block";
+          break;
+
+        case 'classes':
+        case 'classesreg':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for class
+          document.querySelector("#classregform").style.display="block";
+          document.querySelector("#classupdform").style.display="none";
+          document.querySelector("#classviewform").style.display="none";
+          break;
+        case'classesupd':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for class
+          document.querySelector("#classregform").style.display="none";
+          document.querySelector("#classupdform").style.display="block";
+          document.querySelector("#classviewform").style.display="none";
+          break;
+        case'classesview':
+          document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".applicationInfo").style.display="none";
+          document.querySelector(".facultyInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="block";
+          document.querySelector(".sponsorInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
+          //interface for class
+          document.querySelector("#classregform").style.display="none";
+          document.querySelector("#classupdform").style.display="none";
+          document.querySelector("#classviewform").style.display="block";
+          break;
+
+
         case 'sponsors':
         case 'sponsorreg':
           document.querySelector(".branchInfo").style.display="none";
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="block";
           document.querySelector(".employeesInfo").style.display="none";
           //interface for department
@@ -869,9 +1660,11 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="block";
           document.querySelector(".employeesInfo").style.display="none";
-                //interface
+          //interface
           document.querySelector("#sponsorregform").style.display="none";
           document.querySelector("#sponsorupdform").style.display="block";
           document.querySelector("#sponsorform").style.display="none";
@@ -881,9 +1674,11 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="block";
           document.querySelector(".employeesInfo").style.display="none";
-                //interface
+          //interface
           document.querySelector("#sponsorregform").style.display="none";
           document.querySelector("#sponsorupdform").style.display="none";
           document.querySelector("#sponsorviewform").style.display="block";
@@ -895,6 +1690,8 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="block";
           //interface for department
@@ -907,9 +1704,11 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="block";
-                  //interface for employee
+          //interface for employee
           document.querySelector("#employeeregform").style.display="none";
           document.querySelector("#employeeupdform").style.display="block";
           document.querySelector("#employeeviewform").style.display="none";
@@ -919,28 +1718,32 @@
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
           document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
           document.querySelector(".employeesInfo").style.display="block";
-                  //interface for employee
+          //interface for employee
           document.querySelector("#employeeregform").style.display="none";
           document.querySelector("#employeeupdform").style.display="none";
           document.querySelector("#employeeviewform").style.display="block";
           break;
 
         default:
-                alert("Default Issue")
-       document.querySelector(".branchInfo").style.display="none";
+          document.querySelector(".branchInfo").style.display="none";
           document.querySelector(".applicationInfo").style.display="none";
           document.querySelector(".facultyInfo").style.display="none";
-            document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".departmentsInfo").style.display="none";
+          document.querySelector(".sectionsInfo").style.display="none";
+          document.querySelector(".classesInfo").style.display="none";
           document.querySelector(".sponsorInfo").style.display="none";
-         document.querySelector(".employeesInfo").style.display="none";
+          document.querySelector(".employeesInfo").style.display="none";
 
           document.querySelector("#branchregform").style.display="block";
           document.querySelector("#branchupdform").style.display="none";
           document.querySelector("#branchviewform").style.display="none";
-}
+      }
     }
+
     for(i=0;i<document.getElementsByClassName("sbmenu").length;i++){
       document.getElementsByClassName("sbmenu")[i].onclick=function(e){
         checkURI(e.target.toString().split("#")[1]);
@@ -948,3 +1751,7 @@
     }
     checkURI(document.URL.toString().split("#/")==1?document.URL.toString().split("#/").length:document.URL.toString().split("#/")[1]);
     </script>
+
+        @footer()
+      </div>
+      }

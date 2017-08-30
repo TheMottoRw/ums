@@ -37,4 +37,8 @@ public class ApplicationType extends Model {
     public static ApplicationType finderById(long id){
         return find.ref(id);
     }
+    public static List<ApplicationType> findByName(String name){
+        return find.where().like("typeName",name+"%").findList();
+    }
+
 }

@@ -20,6 +20,7 @@ public class Employee extends Model {
     public String lastName = "";
     public long phoneNumber;
     public String email = "";
+    public String password="";
     public String location = "";
     public String address = "";
     public String qualification="";
@@ -48,5 +49,11 @@ public class Employee extends Model {
     }
     public static Employee byfirstName(String firstName) {
         return find.where().eq("firstName", firstName).findUnique();
+    }
+    public static List<Employee> findByNames(String name){
+         return find.where().like("firstName",name+"%").findList();
+    }
+    public static List<Employee> loadName(long id){
+        return find.where().eq("id",id).findList();
     }
 }

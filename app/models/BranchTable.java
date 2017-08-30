@@ -15,7 +15,7 @@ import java.util.List;
  * Created by BPRAdmin on 6/23/2017.
  */
 @Entity
-public class Branch extends Model{
+public class BranchTable extends Model{
     @Id
     public long id;
     public  String branchName="";
@@ -30,11 +30,14 @@ public class Branch extends Model{
     @ManyToOne(cascade = CascadeType.ALL)
     public Employee employee;
 
-    public static Model.Finder<Long, Branch> find = new Model.Finder<Long, Branch>(Long.class, Branch.class);
-    public static List<Branch> all(){
+    public static Model.Finder<Long, BranchTable> find = new Model.Finder<Long, BranchTable>(Long.class, BranchTable.class);
+    public static List<BranchTable> all(){
         return find.where().not(Expr.eq("delete_status", "1")).findList();
     }
-    public static Branch finderById(long id){
+    public static BranchTable finderById(long id){
         return find.ref(id);
+    }
+    public static List<BranchTable> findByName(String name){
+        return find.where().like("branchName",name+"%").findList();
     }
 }

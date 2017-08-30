@@ -10,10 +10,10 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                 <center><strong>Error!</strong> {{error}}.</center>
             </div>
-            <form name="form" action="/admission/"method="get">
-                <center><img src="@routes.Assets.at("images/logo.jpg")" style="height: 100px;width: 200px"></center>
+            <form name="form" action=""method="POST">
+                <center><img src="@routes.Assets.at("images/logo.png")" style="height: 100px;width: 200px"></center>
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">E-mail/Username</label>
                     <i class="fa fa-key"></i>
                     <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
                     <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-actions">
                     <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                    <button  type="submit" class="btn btn-success pull-left">Login</button>&nbsp;
+                    <button  type="submit" class="btn btn-success pull-left" ng-click="login()">Login</button>&nbsp;
                     <div style="margin-top: 2%;" class="pull-right">
                     <a  href="#"> Forgot password ?</a>  <a href="#" data-toggle="modal" data-target="#myModal"> New admission sign up</a>
                     </div>
@@ -46,35 +46,38 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">New admission sign up form</h4>
                     </div>
+                    <form action="" method="POST" role="form">
+                        <p style="color:green;"> {{regstudsuccessmsg}}</p>
                     <div class="modal-body">
                         <form action="/" method="get">
                         <div class="form-group">
                             <label>First name</label>
-                            <input type="text" class="form-control" name="fname" id="fname" />
+                            <input type="text" class="form-control" name="fname" id="fname" ng-model="studFname"/>
                         </div>
                         <div class="form-group">
                             <label>Last name</label>
-                            <input type="text" class="form-control" name="lname" id="lname" />
+                            <input type="text" class="form-control" name="lname" id="lname" ng-model="studLname"/>
                         </div>
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="text" class="form-control" name="email" id="email" />
+                            <input type="text" class="form-control" name="email" id="email" ng-model="studEmail"/>
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" name="password" id="password"/>
+                            <input type="password" class="form-control" name="password" id="password"ng-model="studPwd"/>
                         </div>
                         <div class="form-group">
                             <label>Confirm password</label>
-                            <input type="password" class="form-control" name="confpassword" id="confpassword" />
+                            <input type="password" class="form-control" name="confpassword" id="confpassword" ng-model="studConfPwd" />
                         </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success"> Submit</button>
+                                <button type="button" class="btn btn-success" ng-click="registerStudent()"> Submit</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>
+                    </form>
                 </div>
 
             </div>

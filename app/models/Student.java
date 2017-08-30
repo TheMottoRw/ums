@@ -26,7 +26,7 @@ public class Student extends Model {
     public String email = "";
     public String password = "";
     public String role = "STUDENT";
-    public String fathertName = "";
+    public String fatherName = "";
     public String motherName = "";
     public String province = "";
     public String districts = "";
@@ -58,7 +58,10 @@ public class Student extends Model {
     public static Student findByEmail(String email) {
         return find.where().eq("email", email).findUnique();
     }
-    public static Student byName(String firstname) {
-        return find.where().eq("first_name", firstname).findUnique();
+    public static List<Student> byName(String firstname) {
+        return find.where().eq("first_name", firstname).findList();
+    }
+    public static List<Student> filterById(Long id) {
+        return find.where().eq("id", id).findList();
     }
 }

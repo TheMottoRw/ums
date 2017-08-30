@@ -19,6 +19,8 @@ public class AcademicYear extends Model {
     @Id
     public long id;
     public  String academicYear = "";
+    public Timestamp startAt = new Timestamp(new Date().getTime());
+    public Timestamp endAt = new Timestamp(new Date().getTime());
 
     public boolean deleteStatus = false;
     public String deleteReason = "";
@@ -33,5 +35,8 @@ public class AcademicYear extends Model {
     }
     public static AcademicYear finderById(long id){
         return find.ref(id);
+    }
+    public static List<AcademicYear> findByYear(String year){
+        return find.where().like("academicYear",year+"%").findList();
     }
 }

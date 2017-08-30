@@ -1,4 +1,4 @@
-@dashboardHome("Test Page"){
+@dashboardHome("TestTable Page"){
   <div ng-controller="MainController" class="controllerCall">
     @frontHeader()
     <br />
@@ -82,7 +82,7 @@
             <label for="names">Names</label>
           </div>
           <div class="col-lg-9">
-            <input type="text" id="names" name="names" class="form-control" ng-model="names" value="{{updcand[0].name}}">
+            <input type="text" id="names" name="names" class="form-control" ng-model="updcand[0].name">
           </div>
           <div class="col-lg-1"></div>
         </div><br/><br/>
@@ -91,7 +91,7 @@
             <label for="names">Password</label>
           </div>
           <div class="col-lg-9">
-            <input type="password" id="pwd" name="pwd" class="form-control" ng-model="pwd"value="{{updcand[0].pwd}}">
+            <input type="password" id="pwd" name="pwd" class="form-control" ng-model="updcand[0].pwd">
           </div>
           <div class="col-lg-1"></div>
         </div><br/><br/>
@@ -100,7 +100,7 @@
             <label for="names">E-mail</label>
           </div>
           <div class="col-lg-9">
-            <input type="text" id="email" name="email" class="form-control" ng-model="email" value="{{updcand[0].email}}">
+            <input type="text" id="email" name="email" class="form-control" ng-model="updcand[0].email">
           </div>
           <div class="col-lg-1"></div>
         </div><br/><br/>
@@ -109,7 +109,7 @@
             <label for="names">Phone</label>
           </div>
           <div class="col-lg-9">
-            <input type="text" id="phone" name="phone" class="form-control" ng-model="phone" value="{{updcand[0].phone}}">
+            <input type="text" id="phone" name="phone" class="form-control" ng-model="updcand[0].phone">
           </div>
           <div class="col-lg-1"></div>
         </div><br/>
@@ -140,10 +140,14 @@
             &nbsp; &nbsp;  <a href="#" class="glyphicon glyphicon-remove" ng-click="disableCandidates(cand.id)"></a>
           </a></div>
         </a></div>
+      <span ng-init="candidatea='';">
         </div><!--ng repeat-->
       </div>
       <br/><br/>
             </div><!--panel 6-->
+  <!--deleting modal-->
+
+
 
 <div class="col-lg-3">
   </div>
