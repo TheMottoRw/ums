@@ -1,0 +1,99 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                                         controllers.Application.index()
+POST          /signin/                                                controllers.Application.signin()
+POST          /login/                                                controllers.Application.login()
+GET           /logout/                                                controllers.Application.logout()
+GET           /admission/                                             controllers.Application.student()
+GET            /applicants/                                           controllers.Application.viewApplicants()
+GET            /setting/                                           controllers.Application.setting()
+POST           /registerBranch/                                   controllers.Application.registerBranch()
+GET           /loadBranch/                                        controllers.Application.loadBranch()
+GET           /loadBranchById/:id/                                        controllers.Application.loadBranchById(id:Long)
+GET           /searchBranch/:name/                                controllers.Application.searchBranch(name:String)
+POST           /updateBranch/:id/                                 controllers.Application.updateBranch(id:Long)
+
+POST           /registerFaculty/                                   controllers.Application.registerFaculty()
+GET           /loadFaculty/                                        controllers.Application.loadFaculty()
+GET           /loadFacultyById/:id/                                controllers.Application.loadFacultyById(id:Long)
+GET           /loadFacultyByBranch/:id/                            controllers.Application.loadFacultyByBranch(id:Long)
+GET           /searchFaculty/:name/                                controllers.Application.searchFaculty(name:String)
+POST           /updateFaculty/:id/                                 controllers.Application.updateFaculty(id:Long)
+
+POST           /registerDepartment/                                controllers.Application.registerDepartment()
+GET           /loadDepartment/                                     controllers.Application.loadDepartment()
+GET           /loadDepartmentById/:id/                             controllers.Application.loadDepartmentById(id:Long)
+GET           /loadDepartmentByFaculty/:id/                        controllers.Application.loadDepartmentByFaculty(id:Long)
+GET           /searchDepartment/:name/                             controllers.Application.searchDepartment(name:String)
+POST           /updateDepartment/:id/                              controllers.Application.updateDepartment(id:Long)
+
+POST           /registerSection/                                   controllers.Application.registerSection()
+GET           /loadSection/                                        controllers.Application.loadSection()
+GET           /loadSectionById/:id/                                controllers.Application.loadSectionById(id:Long)
+GET           /searchSection/:name/                                controllers.Application.searchSection(name:String)
+POST           /updateSection/:id/                                 controllers.Application.updateSection(id:Long)
+
+POST           /registerApplication/                                   controllers.Application.registerApplication()
+GET           /loadApplication/                                        controllers.Application.loadApplication()
+GET           /loadApplicationById/:id/                                controllers.Application.loadApplicationById(id:Long)
+GET           /searchApplication/:name/                                controllers.Application.searchApplication(name:String)
+POST           /updateApplication/:id/                                 controllers.Application.updateApplication(id:Long)
+
+POST           /registerApptype/                                   controllers.Application.registerAppType()
+GET           /loadApptype/                                        controllers.Application.loadAppType()
+GET           /loadApptypeById/:id/                                controllers.Application.loadAppTypeById(id:Long)
+GET           /searchApptype/:name/                                controllers.Application.searchAppType(name:String)
+POST           /updateApptype/:id/                                 controllers.Application.updateAppType(id:Long)
+
+POST           /registerClass/                                     controllers.Application.registerClass()
+GET           /loadClasses/                                        controllers.Application.loadClasses()
+GET           /loadClassesById/:id/                                controllers.Application.loadClassesById(id:Long)
+GET           /loadClassesBySection/:id/                           controllers.Application.loadClassesBySection(id:Long)
+GET           /searchClass/:name/                                  controllers.Application.searchClass(name:String)
+POST           /updateClass/:id/                                   controllers.Application.updateClass(id:Long)
+
+POST           /registerSponsor/                                   controllers.Application.registerSponsor()
+GET           /loadSponsor/                                        controllers.Application.loadSponsor()
+GET           /loadSponsorById/:id/                                controllers.Application.loadSponsorById(id:Long)
+GET           /searchSponsor/:name/                                controllers.Application.searchSponsor(name:String)
+POST           /updateSponsor/:id/                                 controllers.Application.updateSponsor(id:Long)
+
+POST           /registerEmployee/                                   controllers.Application.registerEmployee()
+GET           /loadEmployee/                                        controllers.Application.loadEmployee()
+GET           /loadEmployeeById/:id/                                controllers.Application.loadEmployeeById(id:Long)
+GET           /searchEmployee/:name/                                controllers.Application.searchEmployee(name:String)
+POST           /updateEmployee/:id/                                 controllers.Application.updateEmployee(id:Long)
+
+POST           /registerStudent/                                   controllers.Application.registerStudent()
+GET           /loadStudent/                                        controllers.Application.loadStudent()
+GET           /searchStudent/:name/                                controllers.Application.searchStudent(name:String)
+GET           /disableStudent/:id/                                 controllers.Application.disableStudent(id:Long)
+GET            /loadStudentById/:id/                               controllers.Application.loadStudentById(id:Long)
+POST           /updateStudent/:id/                                 controllers.Application.updateStudent(id:Long)
+
+POST           /delete/:cate/:id/:reason/                                controllers.Application.delete(cate:String,id:Long,reason:String)
+
+#test for learning purpose
+GET           /test/                                                  controllers.Tests.test()
+POST           /registercandidates/                                   controllers.Tests.registCandidates()
+GET           /loadCandidates/                                        controllers.Tests.loadCandidates()
+GET           /searchCandidates/:name/                                controllers.Tests.searchCandidates(name:String)
+GET           /disableCandidates/:id/                                 controllers.Tests.disableCandidates(id:Long)
+GET            /loadCandidatesById/:id/                               controllers.Tests.loadCandidatesById(id:Long)
+POST           /updatecandidates/:id/                                 controllers.Tests.updateCandidates(id:Long)
+GET           /testDate/                                            controllers.Application.testDate()
+
+
+
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET          /assets/*file                            controllers.Assets.at(path="/public", file)
+
+

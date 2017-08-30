@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Play2ExcludedModulesSettings">
+    <option name="INFO">
+      <map>
+        <entry key="playConf">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="sourceDir" value="F:\play\ums\conf" />
+              <option name="confDir" value="C:\play\ums\conf" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="playRoutesImports">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="routesImports">
+                <list>
+                  <option value="play.libs.F" />
+                </list>
+              </option>
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="playVersion">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="version" value="2.2.6" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="sourceDirectory">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="sourceDir" value="C:\play\ums\app" />
+              <option name="confDir" value="F:\play\ums\app" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="twirlTemplatesImports">
+          <value>
+            <ProjectSettingsEntry />
+          </value>
+        </entry>
+        <entry key="ums">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.10/jars/play_2.10-2.2.6.jar" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="uri">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="uri" value="/F:/play/ums" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
